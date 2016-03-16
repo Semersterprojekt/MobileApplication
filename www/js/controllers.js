@@ -84,6 +84,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       if (res) {
         $http.post(url, output, {headers: {'Content-Type': 'application/json'}})
           .then(function (response) {
+
           });
       } else {
         //der user hat das Bild verworfen.
