@@ -1,6 +1,12 @@
 <ion-view view-title="Take a Picture">
   <ion-content class="padding">
-    <img src="{{pictureUrl}}">
-    <button class="button-block button-clear button-dark" onclick="takePicture()">Take a Picture</button>
+    <div class="list card">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}">
+      </div>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-dark" ng-click="takePicture()">Take a Picture</button>
+    </div>
   </ion-content>
 </ion-view>
