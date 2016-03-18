@@ -97,3 +97,18 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
 
 });
+
+
+app.controller('GalleryCtrl', function ($scope, $http) {
+  getUrl = "http://193.5.58.95/api/v1/tests";
+  config = {headers: {'Content-Type': 'application/json'}};
+
+  var dataArray = [];
+
+  $http.get(getUrl, config).then(function (data) {
+    console.log("data");
+    dataArray = data;
+  });
+
+
+});
