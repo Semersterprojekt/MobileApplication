@@ -13,7 +13,7 @@ app.controller('ChatsCtrl', function ($scope, Chats) {
   //});
 
   $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
+  $scope.remove = function (chat) {
     Chats.remove(chat);
   };
 });
@@ -100,15 +100,34 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
 
 app.controller('GalleryCtrl', function ($scope, $http) {
-  getUrl = "http://193.5.58.95/api/v1/tests";
-  config = {headers: {'Content-Type': 'application/json'}};
 
-  var dataArray = [];
 
-  $http.get(getUrl, config).then(function (data) {
-    console.log("data");
-    dataArray = data;
-  });
+  function gibDatenaus(daten) {
+    var daten = daten;
+    var urlListen = [];
+
+    for (item in daten) {
+      for (subItem in daten[item]) {
+        $scope.urllisten.push(daten[item][subItem]);
+        console.log($scope.urllisten);
+      }
+    }
+  }
+
+  $scope.bilderDownload = function(){
+    getUrl = "http://193.5.58.95/api/v1/tests";
+
+    $scope.urllisten = [];
+
+
+    $http.get(getUrl).success(function (data) {
+      console.log("success!");
+      console.log(data);
+      gibDatenaus(data);
+
+      //   console.log(data.data.img_path);
+    });
+  }
 
 
 });
