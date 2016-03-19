@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38fbb8b8-5576-490a-be86-33d0016cdc64" name="Default" comment="get Versucht -- funktioniert nicth">
+    <list default="true" id="38fbb8b8-5576-490a-be86-33d0016cdc64" name="Default" comment="Codeformattierung">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers.js" afterPath="$PROJECT_DIR$/www/js/controllers.js" />
     </list>
     <ignored path="Semesterapplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +26,11 @@
       <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9203099">
-              <caret line="118" column="31" selection-start-line="118" selection-start-column="31" selection-end-line="118" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.6613171">
+              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
                 <element signature="e#771#825#0" expanded="false" />
-                <element signature="e#3343#3906#0" expanded="false" />
+                <element signature="e#3345#3908#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -316,13 +314,26 @@
       <option name="project" value="LOCAL" />
       <updated>1458295605850</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="GPS daten werden gesendet.">
+      <created>1458403268817</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1458403268817</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Codeformattierung">
+      <created>1458403331394</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1458403331394</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="3840" y="18" width="1080" height="1902" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -337,7 +348,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32951444" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -361,7 +371,9 @@
     <MESSAGE value="update: alle funktionien bleiben erhalten. Neu mit Icon. --splashscreen funktioniert noch nicht richtig.&#10;&#10;--testcommit. nichts geändert" />
     <MESSAGE value="-testcommit" />
     <MESSAGE value="get Versucht -- funktioniert nicth" />
-    <option name="LAST_COMMIT_MESSAGE" value="get Versucht -- funktioniert nicth" />
+    <MESSAGE value="GPS daten werden gesendet." />
+    <MESSAGE value="Codeformattierung" />
+    <option name="LAST_COMMIT_MESSAGE" value="Codeformattierung" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -377,7 +389,7 @@
           <caret line="117" column="47" selection-start-line="117" selection-start-column="47" selection-end-line="117" selection-end-column="47" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -412,7 +424,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -447,7 +459,7 @@
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -489,7 +501,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -545,7 +557,7 @@
           <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,11 +669,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9203099">
-          <caret line="118" column="31" selection-start-line="118" selection-start-column="31" selection-end-line="118" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.6613171">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
             <element signature="e#771#825#0" expanded="false" />
-            <element signature="e#3343#3906#0" expanded="false" />
+            <element signature="e#3345#3908#0" expanded="false" />
           </folding>
         </state>
       </provider>
