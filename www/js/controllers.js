@@ -88,6 +88,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   function sendPhoto(image) {
 
     var url = "http://193.5.58.95/api/v1/tests";
+
+
     var data;
     if (lat == "undefined" || long == "undefined") {
       data = "keine Geodaten";
