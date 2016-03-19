@@ -29,9 +29,34 @@ app.controller('AccountCtrl', function ($scope) {
 });
 
 
-app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopup) {
+app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopup, $cordovaGeolocation) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
+  //Longitude und Latitude Variablen, die immer wieder überschrieben werden.
+  var lat;
+  var long;
+
+//optionen für den Location Service.
+  var watchOptions = {
+    timeout: 1000,
+    enableHighAccuracy: false // may cause errors if true
+  };
+
+  //userposition wird immer wieder aufgerufen.
+  var watch = $cordovaGeolocation.watchPosition(watchOptions);
+  watch.then(
+    null,
+    function (err) {
+      // error
+    },
+    function (position) {
+      console.log("watchposition : " + position);
+      lat = position.coords.latitude;
+      long = position.coords.longitude;
+    });
+
+
+
 
   //diese Funktion startet die Kamera.
   $scope.takePicture = function () {
@@ -63,8 +88,15 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   function sendPhoto(image) {
 
     var url = "http://193.5.58.95/api/v1/tests";
+    var data;
+    if (lat == "undefined" || long == "undefined") {
+      data = "keine Geodaten";
+      (navigator.geolocation)
 
-    var data = "Hier stehen die Daten drin";
+    } else {
+      data = lat + " : " + long;
+    }
+
     var comment = "Hier steht der Kommentar drin";
     var b64 = image;
 
@@ -84,20 +116,21 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       if (res) {
         $http.post(url, output, {headers: {'Content-Type': 'application/json'}})
           .then(function (response) {
-
+            watch.clearWatch();
           });
       } else {
         //der user hat das Bild verworfen.
         $scope.pictureUrl = 'http://placehold.it/300x300';
       }
     });
-
-
-  };
+  }
 
 
 });
 
+app.controller('GpsCtrl', function ($scope) {
+  console.log("im GPS controller");
+})
 
 app.controller('GalleryCtrl', function ($scope, $http) {
 
