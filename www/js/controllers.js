@@ -157,9 +157,6 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 });
 
-app.controller('LoginCtrl', function ($scope) {
-  console.log()
-});
 
 app.controller('SettingCtrl', function ($scope) {
   console.log()
