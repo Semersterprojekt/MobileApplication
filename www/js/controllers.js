@@ -157,10 +157,31 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 });
 
-app.controller('LoginCtrl', function ($scope) {
-
+app.controller('LoginCtrl', function ($scope, $http) {
+  var token;
+  var loginUrl = 'http://193.5.58.95/api/v1/authenticate'
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   console.log("bin im login Controller");
+
+  $scope.logIn = function () {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var headers = {headers: {'Content-Type': 'application/json'}};
+    var data = {
+      username: username,
+      email: username,
+      password: password
+    }
+
+    $http.post(loginUrl, data, headers).then(function (resp) {
+      console.log(resp.statusText + "status");
+      console.log("Sry bro. falsche anmeldedaten");
+
+    }, function (fail) {
+      console.log(fail);
+    });
+
+  }
 
 
 });
