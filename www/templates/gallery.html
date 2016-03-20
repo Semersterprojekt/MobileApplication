@@ -1,6 +1,6 @@
 <ion-view view-title="Gallery">
 
-  <ion-content ng-controller="GalleryCtrl" ng-init="bilderDownload()">
+  <ion-content ng-init="bilderDownload()">
     <div class="row" ng-repeat="image in urllisten" ng-if="$index % 4 === 0">
       <div class="col col-25">
         <img ng-src="http://193.5.58.95/{{urllisten[$index].img_path}}" width="100%"/>

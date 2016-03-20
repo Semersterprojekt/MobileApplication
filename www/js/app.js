@@ -40,46 +40,47 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+    .state('tab.upload', {
+      url: '/upload',
     views: {
-      'tab-dash': {
+      'tab-upload': {
         templateUrl: 'templates/takeapicture.html',
         controller: 'CameraCtrl'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+    .state('tab.gallery', {
+      url: '/gallery',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-gallery': {
+          templateUrl: 'templates/gallery.html',
+          controller: 'GalleryCtrl'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+    .state('tab.setting', {
+      url: '/setting',
+      views: {
+        'tab-settings': {
+          templateUrl: 'templates/setting.html',
+          controller: 'SettingCtrl'
+        }
       }
-    }
-  });
+    })
+
+    .state('tab.login', {
+      url: '/login',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/login.html',
+          controller: 'LoginCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/upload');
 
 });

@@ -56,8 +56,6 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     });
 
 
-
-
   //diese Funktion startet die Kamera.
   $scope.takePicture = function () {
 
@@ -90,15 +88,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     var url = "http://193.5.58.95/api/v1/tests";
 
 
-    var data;
-    if (lat == "undefined" || long == "undefined") {
-      data = "keine Geodaten";
-      (navigator.geolocation)
-
-    } else {
-      data = lat + " : " + long;
-    }
-
+    var data = lat + " : " + long;
     var comment = "Hier steht der Kommentar drin";
     var b64 = image;
 
@@ -149,7 +139,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     }
   }
 
-  $scope.bilderDownload = function(){
+  $scope.bilderDownload = function () {
     getUrl = "http://193.5.58.95/api/v1/tests";
 
     $scope.urllisten = [];
@@ -165,4 +155,12 @@ app.controller('GalleryCtrl', function ($scope, $http) {
   }
 
 
+});
+
+app.controller('LoginCtrl', function ($scope) {
+  console.log()
+});
+
+app.controller('SettingCtrl', function ($scope) {
+  console.log()
 });
