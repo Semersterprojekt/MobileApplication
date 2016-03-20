@@ -1,7 +1,28 @@
 <ion-view title="Login">
-  <ion-content>
-    <h1>was geht???</h1>
+  <ion-content scroll="false">
+    <section class="login-container">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}">
+      </div>
 
-    <a class="button button-block button-calm" href="#/tab/upload">Geh zum Bilder</a>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password">
+        </label>
+      </div>
+
+      <ion-checkbox class="item item-input">Rememger me</ion-checkbox>
+
+      <div class="button-bar col-bottom">
+        <a class="button button-positive">Log in</a>
+        <a class="button button-balanced" href="#/register">Registrieren</a>
+
+      </div>
+    </section>
   </ion-content>
 </ion-view>

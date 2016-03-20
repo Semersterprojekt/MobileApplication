@@ -157,6 +157,23 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 });
 
+app.controller('LoginCtrl', function ($scope) {
+
+  $scope.pictureUrl = "img/icon_without_radius.jpg";
+  console.log("bin im login Controller");
+
+
+});
+
+
+app.controller('RegisterCtrl', function ($scope) {
+
+  $scope.pictureUrl = "img/icon_without_radius.jpg";
+  console.log("bin im register Controller");
+
+
+});
+
 
 app.controller('SettingCtrl', function ($scope) {
   console.log()
