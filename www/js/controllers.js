@@ -157,9 +157,9 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, $http) {
+app.controller('LoginCtrl', function ($scope, $http, $location) {
   var token;
-  var loginUrl = 'http://193.5.58.95/api/v1/authenticate'
+  var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   console.log("bin im login Controller");
 
@@ -174,8 +174,14 @@ app.controller('LoginCtrl', function ($scope, $http) {
     }
 
     $http.post(loginUrl, data, headers).then(function (resp) {
-      console.log(resp.statusText + "status");
-      console.log("Sry bro. falsche anmeldedaten");
+      console.log(resp);
+      //    console.log(resp.statusText + "status");
+      //    console.log("Sry bro. falsche anmeldedaten");
+      token = resp.data.token;
+      console.log("das ist der Token  " + token);
+      if (resp.status == 200) {
+        $location.path("/tab/takepicture");
+      }
 
     }, function (fail) {
       console.log(fail);
@@ -187,11 +193,40 @@ app.controller('LoginCtrl', function ($scope, $http) {
 });
 
 
-app.controller('RegisterCtrl', function ($scope) {
+app.controller('RegisterCtrl', function ($scope, $http) {
 
   $scope.pictureUrl = "img/icon_without_radius.jpg";
+  var registerUrl = 'http://193.5.58.95/api/v1/authenticate/register'
   console.log("bin im register Controller");
 
+
+  $scope.register = function () {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var mail = document.getElementById("mail").value;
+
+    console.log("Eingaben :" + username + password + mail);
+    var headers = {headers: {'Content-Type': 'application/json'}};
+    var data = {
+      username: username,
+      email: mail,
+      password: password
+    }
+
+    $http.post(registerUrl, data, headers).then(function (resp) {
+      console.log(resp);
+      //    console.log(resp.statusText + "status");
+      //    console.log("Sry bro. falsche anmeldedaten");
+
+      console.log(resp);
+      if (resp.statusText === "OK") {
+        window.location.href = "#/tab/takepicture";
+      }
+    }, function (fail) {
+      console.log(fail);
+    })
+
+  }
 
 });
 
