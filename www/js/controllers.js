@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', ['ionic']);
+var app = angular.module('starter.controllers', ['ionic', 'ui.router']);
 
 app.controller('DashCtrl', function ($scope) {
 });
@@ -157,7 +157,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, $http, $location) {
+app.controller('LoginCtrl', function ($scope, $http, $state) {
   var token;
   var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
   $scope.pictureUrl = "img/icon_without_radius.jpg";
@@ -180,7 +180,7 @@ app.controller('LoginCtrl', function ($scope, $http, $location) {
       token = resp.data.token;
       console.log("das ist der Token  " + token);
       if (resp.status == 200) {
-        $location.path("/tab/takepicture");
+        $state.go("tab.upload");
       }
 
     }, function (fail) {
@@ -193,7 +193,7 @@ app.controller('LoginCtrl', function ($scope, $http, $location) {
 });
 
 
-app.controller('RegisterCtrl', function ($scope, $http) {
+app.controller('RegisterCtrl', function ($scope, $http, $state) {
 
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   var registerUrl = 'http://193.5.58.95/api/v1/authenticate/register'
@@ -220,7 +220,7 @@ app.controller('RegisterCtrl', function ($scope, $http) {
 
       console.log(resp);
       if (resp.statusText === "OK") {
-        window.location.href = "#/tab/takepicture";
+        $state.go("tab.upload");
       }
     }, function (fail) {
       console.log(fail);
