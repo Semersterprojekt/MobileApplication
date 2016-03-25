@@ -2,5 +2,15 @@
 
 .item.item-input {
   background-color: transparent;
+  border-color: #ff4000;
 
+}
+
+#input-text {
+  color: #ff4000;
+}
+
+.input-label {
+  color: #ff4000;
+  font-family: "Ubuntu Light";
 }

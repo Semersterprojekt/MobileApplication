@@ -85,7 +85,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
   function sendPhoto(image) {
 
-    var url = "http://193.5.58.95/api/v1/tests";
+    var url = "http://193.5.58.95/api/v1/tests?token=" + localStorage.getItem("token");
 
 
     var data = lat + " : " + long;
@@ -127,8 +127,14 @@ app.controller('GpsCtrl', function ($scope) {
 app.controller('GalleryCtrl', function ($scope, $http) {
 
 
+  $scope.init = function () {
+    $scope.bilderDownload();
+  }
+
+
   function gibDatenaus(daten) {
     var daten = daten;
+    console.log(daten);
     var urlListen = [];
 
     for (item in daten) {
@@ -140,33 +146,40 @@ app.controller('GalleryCtrl', function ($scope, $http) {
   }
 
   $scope.bilderDownload = function () {
-    getUrl = "http://193.5.58.95/api/v1/tests";
-
+    getUrl = "http://193.5.58.95/api/v1/tests?token=" + localStorage.getItem("token");
     $scope.urllisten = [];
 
 
     $http.get(getUrl).success(function (data) {
-      console.log("success!");
-      console.log(data);
       gibDatenaus(data);
 
       //   console.log(data.data.img_path);
     });
   }
 
+//Diese Funktion wird bei jedem aufruf der View aufgeführt.
+  $scope.$on('$ionicView.enter', function () {
+    $scope.bilderDownload();
+    var name = localStorage.getItem("user");
+    var position = name.indexOf("@");
+    $scope.user = localStorage.getItem("user").substr(0, position);
+
+  })
 
 });
 
-app.controller('LoginCtrl', function ($scope, $http, $state) {
+app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
   var token;
   var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
   $scope.pictureUrl = "img/icon_without_radius.jpg";
-  console.log("bin im login Controller");
+  var username;
+  var password;
+  var headers;
 
   $scope.logIn = function () {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var headers = {headers: {'Content-Type': 'application/json'}};
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
+    headers = {headers: {'Content-Type': 'application/json'}};
     var data = {
       username: username,
       email: username,
@@ -175,21 +188,32 @@ app.controller('LoginCtrl', function ($scope, $http, $state) {
 
     $http.post(loginUrl, data, headers).then(function (resp) {
       console.log(resp);
-      //    console.log(resp.statusText + "status");
-      //    console.log("Sry bro. falsche anmeldedaten");
-      token = resp.data.token;
-      console.log("das ist der Token  " + token);
+
       if (resp.status == 200) {
+        //speicherung des Tokens in einer Session
+        $scope.token = resp.data.token;
+        localStorage.setItem("token", $scope.token);
+        localStorage.setItem("user", username);
         $state.go("tab.upload");
       }
 
+
     }, function (fail) {
       console.log(fail);
+      showMessage("Login hat nicht funktioniert");
     });
 
   }
 
 
+  function showMessage(text) {
+    var message = text;
+    $cordovaToast.showShortBottom(message).then(function (success) {
+      // success
+    }, function (error) {
+      // error
+    });
+  }
 });
 
 
