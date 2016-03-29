@@ -29,7 +29,7 @@ app.controller('AccountCtrl', function ($scope) {
 });
 
 
-app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopup, $cordovaGeolocation) {
+app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopup, $cordovaGeolocation, $state) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   //Longitude und Latitude Variablen, die immer wieder überschrieben werden.
@@ -41,6 +41,13 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     timeout: 1000,
     enableHighAccuracy: false // may cause errors if true
   };
+
+  //Diese Funktion wird bei jedem aufruf der View aufgeführt.
+  $scope.$on('$ionicView.enter', function () {
+
+    $scope.pictureUrl = 'http://placehold.it/300x300';
+  })
+
 
   //userposition wird immer wieder aufgerufen.
   var watch = $cordovaGeolocation.watchPosition(watchOptions);
@@ -87,15 +94,19 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
     var url = "http://193.5.58.95/api/v1/tests?token=" + localStorage.getItem("token");
 
-
-    var data = lat + " : " + long;
+    var geoX;
+    var geoY;
     var comment = "Hier steht der Kommentar drin";
+    var user_id = localStorage.getItem("userid");
     var b64 = image;
 
     var output = {
-      data: data,
+      data: "text hier sollte daten sein",
       comment: comment,
-      base64: b64
+      base64: b64,
+      geoX: lat,
+      geoY: long,
+      user_id: user_id
     }
 
     var confirmPopup = $ionicPopup.confirm({
@@ -114,6 +125,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
         //der user hat das Bild verworfen.
         $scope.pictureUrl = 'http://placehold.it/300x300';
       }
+      $state.go("tab.gallery");
+
     });
   }
 
@@ -121,7 +134,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 });
 
 app.controller('GpsCtrl', function ($scope) {
-  console.log("im GPS controller");
+  // console.log("im GPS controller");
 })
 
 app.controller('GalleryCtrl', function ($scope, $http) {
@@ -134,13 +147,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
   function gibDatenaus(daten) {
     var daten = daten;
-    console.log(daten);
+    //console.log(daten);
     var urlListen = [];
 
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-        console.log($scope.urllisten);
+        //console.log($scope.urllisten);
       }
     }
   }
@@ -160,9 +173,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
     $scope.bilderDownload();
-    var name = localStorage.getItem("user");
-    var position = name.indexOf("@");
-    $scope.user = localStorage.getItem("user").substr(0, position);
+    $scope.user = localStorage.getItem("user");
 
   })
 
@@ -171,6 +182,8 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
   var token;
   var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
+  var getUserInfoUrl = 'http://193.5.58.95/api/v1/authenticate/user?token=';
+  //proenginelogo
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   var username;
   var password;
@@ -193,7 +206,10 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
         //speicherung des Tokens in einer Session
         $scope.token = resp.data.token;
         localStorage.setItem("token", $scope.token);
-        localStorage.setItem("user", username);
+        $http.get(getUserInfoUrl + localStorage.getItem("token"), headers).then(function (resp) {
+          localStorage.setItem("userid", resp.data.user.id);
+          localStorage.setItem("user", resp.data.user.username);
+        })
         $state.go("tab.upload");
       }
 
