@@ -1,0 +1,32 @@
+<ion-view view-title="Take a Picture">
+  <ion-content style="background: #555555;">
+    <div class="list card">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}" ng-click="takePicture()">
+      </div>
+    </div>
+
+    <hr>
+    <label id="markenlabel">Marke</label>
+    <div id="mainselection">
+
+      <select>
+        <option ng-repeat="brand in brands" ng-click="loadModelSelector()">
+          {{brand.title}}
+        </option>
+      </select>
+    </div>
+<hr>
+
+    <label id="modellabel">Modell</label>
+    <div id="mainselection">
+      <select>
+        <option ng-repeat="model in models"> {{model.title}}</option>
+      </select>
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-dark" ng-click="takePicture()">Bild Senden</button>
+    </div>
+  </ion-content>
+</ion-view>

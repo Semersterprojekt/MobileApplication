@@ -36,6 +36,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   var lat;
   var long;
 
+  var carQueryUrl = "http://www.carqueryapi.com/api/0.3/?callback=JSON_CALLBACK&";
+
 //optionen für den Location Service.
   var watchOptions = {
     timeout: 1000,
@@ -44,8 +46,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
   //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
-
     $scope.pictureUrl = 'http://placehold.it/300x300';
+    loadBrandSelector();
   })
 
 
@@ -87,8 +89,37 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     }, function (err) {
       // error
     });
+  }
+
+  function loadBrandSelector(){
+    $scope.brands = [];
+    var cmd = "cmd=getMakes";
+    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
+      storebrands(resp);
+    }).error(function (err) {
+      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+    })
+  }
+
+  function storebrands(object) {
+    for (var i = 0; i < object.Makes.length; i++) {
+      $scope.brands.push({title: object.Makes[i].make_display, id : object.Makes[i].make_id});
+    }
+  }
+
+  $scope.loadModelSelector = function(make){
+    console.log("wa geh" + make);
 
   }
+
+  function storemodels(object) {
+
+    JSON.stringify(object);
+    /* for (var i = 0; i < object.Makes.length; i++) {
+      $scope.brands.push({title: object.Makes[i].make_display, id : object.Makes[i].make_id});
+    }*/
+  }
+
 
   function sendPhoto(image) {
 
@@ -173,13 +204,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
     $scope.bilderDownload();
-    $scope.user = localStorage.getItem("user");
+    $scope.user = localStorage.getItem("username");
 
   })
 
 });
 
-app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
+app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $auth) {
   var token;
   var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
   var getUserInfoUrl = 'http://193.5.58.95/api/v1/authenticate/user?token=';
@@ -190,6 +221,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
   var headers;
 
   $scope.logIn = function () {
+
     username = document.getElementById("username").value;
     password = document.getElementById("password").value;
     headers = {headers: {'Content-Type': 'application/json'}};
@@ -198,37 +230,47 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast) {
       email: username,
       password: password
     }
+    /*
+     $http.post(loginUrl, data, headers).then(function (resp) {
+     console.log(resp);
 
-    $http.post(loginUrl, data, headers).then(function (resp) {
-      console.log(resp);
-
-      if (resp.status == 200) {
-        //speicherung des Tokens in einer Session
-        $scope.token = resp.data.token;
-        localStorage.setItem("token", $scope.token);
-        $http.get(getUserInfoUrl + localStorage.getItem("token"), headers).then(function (resp) {
-          localStorage.setItem("userid", resp.data.user.id);
-          localStorage.setItem("user", resp.data.user.username);
-        })
-        $state.go("tab.upload");
-      }
-
-
-    }, function (fail) {
-      console.log(fail);
-      showMessage("Login hat nicht funktioniert");
-    });
-
-  }
+     if (resp.status == 200) {
+     //speicherung des Tokens in einer Session
+     $scope.token = resp.data.token;
+     localStorage.setItem("token", $scope.token);
+     $http.get(getUserInfoUrl + localStorage.getItem("token"), headers).then(function (resp) {
+     localStorage.setItem("userid", resp.data.user.id);
+     localStorage.setItem("user", resp.data.user.username);
+     })
+     $state.go("tab.upload");
+     }
 
 
-  function showMessage(text) {
-    var message = text;
-    $cordovaToast.showShortBottom(message).then(function (success) {
-      // success
-    }, function (error) {
-      // error
-    });
+     }, function (fail) {
+     console.log(fail);
+     //showMessage("Login hat nicht funktioniert");
+     });
+     */
+    $auth.login(data).then(function () {
+      $http.get('http://193.5.58.95/api/v1/authenticate/user').success(function (resp) {
+        console.log(resp);
+        localStorage.setItem("username", resp.user.username);
+        $state.go("tab.gallery");
+      }).error(function (err) {
+         // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
+        }
+      )
+    })
+
+
+    function showMessage(text) {
+      var message = text;
+      $cordovaToast.showShortBottom(message).then(function (success) {
+        // success
+      }, function (error) {
+        // error
+      });
+    }
   }
 });
 
