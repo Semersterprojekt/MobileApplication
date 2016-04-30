@@ -94,8 +94,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 200,
-      targetHeight: 200,
+      targetWidth: 1000,
+      targetHeight: 1000,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false,
       correctOrientation: true
