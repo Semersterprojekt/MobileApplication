@@ -27,7 +27,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',
 
 .config(function($stateProvider, $urlRouterProvider,$authProvider) {
 
-  $authProvider.loginUrl = 'http://193.5.58.95/api/v1/authenticate/admin';
+  $authProvider.loginUrl = 'http://193.5.58.95/api/v1/authenticate';
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
