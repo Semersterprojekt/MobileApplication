@@ -6,43 +6,43 @@
  */
 (function(){
 var ngCordovaMocks = angular.module('ngCordovaMocks', []);
-/**
- * @ngdoc service
- * @name ngCordovaMocks.cordovaActionSheet
- *
- * @description
- * A service for testing action sheet
- * in an app build with ngCordova.
- **/
-ngCordovaMocks.factory('$cordovaActionSheet', ['$q', function ($q) {
-  var throwsError = false;
+  /**
+   * @ngdoc service
+   * @name ngCordovaMocks.cordovaActionSheet
+   *
+   * @description
+   * A service for testing action sheet
+   * in an app build with ngCordova.
+   **/
+  ngCordovaMocks.factory('$cordovaActionSheet', ['$q', function ($q) {
+    var throwsError = false;
 
-	return {
-		/**
-		 * @ngdoc property
-		 * @name throwsError
-		 * @propertyOf ngCordovaMocks.cordovaActionSheet
-		 * @type Boolean
-		 *
-		 * @description
-		 * A flag that signals whether a promise should be rejected.
-		 * This property should only be used in automated tests
-		 */
-		throwsError: throwsError,
+    return {
+      /**
+       * @ngdoc property
+       * @name throwsError
+       * @propertyOf ngCordovaMocks.cordovaActionSheet
+       * @type Boolean
+       *
+       * @description
+       * A flag that signals whether a promise should be rejected.
+       * This property should only be used in automated tests
+       */
+      throwsError: throwsError,
 
-		show: function () {
-			var defer = $q.defer();
+      show: function () {
+        var defer = $q.defer();
 
-			if (this.throwsError) {
-				defer.reject('There was an error on showing action sheet');
-			} else {
-				defer.resolve();
-			}
+        if (this.throwsError) {
+          defer.reject('There was an error on showing action sheet');
+        } else {
+          defer.resolve();
+        }
 
-			return defer.promise;
-		}
-	};
-}]);
+        return defer.promise;
+      }
+    };
+  }]);
 
 ngCordovaMocks.factory('$cordovaAppVersion', ['$q', function ($q) {
   var throwsError = false;
@@ -1555,7 +1555,7 @@ ngCordovaMocks.factory('$cordovaFileTransfer', ['$q', function ($q) {
         },
 
         upload: function (server, filePath, options) {
-            return mockIt.call(this, 'There was an error uploading the file.'); 
+            return mockIt.call(this, 'There was an error uploading the file.');
         }
     };
 }]);
@@ -2380,7 +2380,7 @@ ngCordovaMocks.factory('$cordovaKeychain', ['$q', function ($q) {
 ngCordovaMocks.factory('$cordovaLocalNotification', ['$q', function ($q) {
 
   var storageKeyPfx  = "ngCordLocNotif-";
-  
+
   function pfxId(id) {
     return storageKeyPfx + id;
   }
@@ -2403,7 +2403,7 @@ ngCordovaMocks.factory('$cordovaLocalNotification', ['$q', function ($q) {
       if (typeof(ids) == "number") ids = [ids];
       ids.forEach(function (id){
         localStorage.removeItem([pfxId(id)]);
-      });      
+      });
       defer.resolve();
       return defer.promise;
     },
@@ -2418,7 +2418,7 @@ ngCordovaMocks.factory('$cordovaLocalNotification', ['$q', function ($q) {
       var defer = $q.defer();
       ids.forEach(function (id){
         localStorage.removeItem([pfxId(id)]);
-      });      
+      });
       defer.resolve();
       return defer.promise;
     },
@@ -2498,7 +2498,7 @@ ngCordovaMocks.factory('$cordovaLocalNotification', ['$q', function ($q) {
  * A service for testing networked fetures
  * in an app build with ngCordova.
  */
-ngCordovaMocks.factory('$cordovaNetwork', ['$rootScope',function ($rootScope) {
+ngCordovaMocks.factory('$cordovaNetwork', ['$rootScope', function ($rootScope) {
   var connectionType = 'WiFi connection';
   var isConnected = true;
 
@@ -2526,12 +2526,12 @@ ngCordovaMocks.factory('$cordovaNetwork', ['$rootScope',function ($rootScope) {
      **/
     isConnected: isConnected,
 
-    switchToOnline: function (){
+    switchToOnline: function () {
       this.isConnected = true;
       $rootScope.$broadcast('$cordovaNetwork:online');
     },
 
-    switchToOffline: function (){
+    switchToOffline: function () {
       this.isConnected = false;
       $rootScope.$broadcast('$cordovaNetwork:offline');
     },
@@ -2550,158 +2550,158 @@ ngCordovaMocks.factory('$cordovaNetwork', ['$rootScope',function ($rootScope) {
   };
 }]);
 
-/**
- * @ngdoc service
- * @name ngCordovaMocks.cordovaProgress
- *
- * @description
- * A service for testing Progress Indicator
- * in an app build with ngCordova.
- */
+  /**
+   * @ngdoc service
+   * @name ngCordovaMocks.cordovaProgress
+   *
+   * @description
+   * A service for testing Progress Indicator
+   * in an app build with ngCordova.
+   */
 
-ngCordovaMocks.factory('$cordovaProgress', [
-  '$timeout', function ($timeout) {
+  ngCordovaMocks.factory('$cordovaProgress', [
+    '$timeout', function ($timeout) {
 
-    return {
-      show: function (_message) {
-        var message = _message || 'Please wait...';
-        console.info('$cordovaProgress.message', message);
-      },
+      return {
+        show: function (_message) {
+          var message = _message || 'Please wait...';
+          console.info('$cordovaProgress.message', message);
+        },
 
-      showSimple: function (_dim) {
-        var dim = _dim || false;
-        console.info('$cordovaProgress.dim', dim);
-      },
+        showSimple: function (_dim) {
+          var dim = _dim || false;
+          console.info('$cordovaProgress.dim', dim);
+        },
 
-      showSimpleWithLabel: function (_dim, _label) {
-        var dim   = _dim || false;
-        var label = _label || 'Loading...';
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.label', label);
-        console.groupEnd();
-      },
+        showSimpleWithLabel: function (_dim, _label) {
+          var dim = _dim || false;
+          var label = _label || 'Loading...';
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.label', label);
+          console.groupEnd();
+        },
 
-      showSimpleWithLabelDetail: function (_dim, _label, _detail) {
-        var dim    = _dim || false;
-        var label  = _label || 'Loading...';
-        var detail = _detail || 'Please wait';
+        showSimpleWithLabelDetail: function (_dim, _label, _detail) {
+          var dim = _dim || false;
+          var label = _label || 'Loading...';
+          var detail = _detail || 'Please wait';
 
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.label', label);
-        console.info('$cordovaProgress.detail', detail);
-        console.groupEnd();
-      },
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.label', label);
+          console.info('$cordovaProgress.detail', detail);
+          console.groupEnd();
+        },
 
-      showDeterminate: function (_dim, _timeout) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
-        console.group();
-        console.info('$cordovaProgress.dim show', dim);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress.dim timeout', dim);
-        }, timeout);
-      },
+        showDeterminate: function (_dim, _timeout) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
+          console.group();
+          console.info('$cordovaProgress.dim show', dim);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress.dim timeout', dim);
+          }, timeout);
+        },
 
-      showDeterminateWithLabel: function (_dim, _timeout, _label) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
-        var label   = _label || 'Loading...';
+        showDeterminateWithLabel: function (_dim, _timeout, _label) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
+          var label = _label || 'Loading...';
 
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.info('$cordovaProgress.label', label);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
-        }, timeout);
-      },
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.info('$cordovaProgress.label', label);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
+          }, timeout);
+        },
 
-      showAnnular: function (_dim, _timeout) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
+        showAnnular: function (_dim, _timeout) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
 
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress.dim timeout', dim);
-        }, timeout);
-      },
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress.dim timeout', dim);
+          }, timeout);
+        },
 
-      showAnnularWithLabel: function (_dim, _timeout, _label) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
-        var label   = _label || 'Loading...';
+        showAnnularWithLabel: function (_dim, _timeout, _label) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
+          var label = _label || 'Loading...';
 
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.info('$cordovaProgress.label', label);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
-        }, timeout);
-      },
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.info('$cordovaProgress.label', label);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
+          }, timeout);
+        },
 
-      showBar: function (_dim, _timeout) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
+        showBar: function (_dim, _timeout) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
 
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress.dim timeout', dim);
-        }, timeout);
-      },
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress.dim timeout', dim);
+          }, timeout);
+        },
 
-      showBarWithLabel: function (_dim, _timeout, _label) {
-        var dim     = _dim || false;
-        var timeout = _timeout || 50000;
-        var label   = _label || 'Loading...';
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.label', label);
-        console.info('$cordovaProgress.timeout', timeout);
-        console.groupEnd();
-        $timeout(function () {
-          console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
-        }, timeout);
-      },
+        showBarWithLabel: function (_dim, _timeout, _label) {
+          var dim = _dim || false;
+          var timeout = _timeout || 50000;
+          var label = _label || 'Loading...';
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.label', label);
+          console.info('$cordovaProgress.timeout', timeout);
+          console.groupEnd();
+          $timeout(function () {
+            console.info('$cordovaProgress[dim, label] timeout', [dim, label]);
+          }, timeout);
+        },
 
-      showSuccess: function (_dim, _label) {
-        var dim   = _dim || false;
-        var label = _label || 'Success';
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.label', label);
-        console.groupEnd();
-      },
+        showSuccess: function (_dim, _label) {
+          var dim = _dim || false;
+          var label = _label || 'Success';
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.label', label);
+          console.groupEnd();
+        },
 
-      showText: function (_dim, _text, _position) {
-        var dim      = _dim || false;
-        var text     = _text || 'Warning';
-        var position = _position || 'center';
-        console.group();
-        console.info('$cordovaProgress.dim', dim);
-        console.info('$cordovaProgress.text', text);
-        console.info('$cordovaProgress.position', position);
-        console.groupEnd();
-      },
+        showText: function (_dim, _text, _position) {
+          var dim = _dim || false;
+          var text = _text || 'Warning';
+          var position = _position || 'center';
+          console.group();
+          console.info('$cordovaProgress.dim', dim);
+          console.info('$cordovaProgress.text', text);
+          console.info('$cordovaProgress.position', position);
+          console.groupEnd();
+        },
 
-      hide: function () {
-        console.info('$cordovaProgress.hide');
-      }
-    };
-  }
-]);
+        hide: function () {
+          console.info('$cordovaProgress.hide');
+        }
+      };
+    }
+  ]);
 
 'use strict';
 

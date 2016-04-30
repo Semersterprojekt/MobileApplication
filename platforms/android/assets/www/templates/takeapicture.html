@@ -10,14 +10,16 @@
     <label id="markenlabel">Marke</label>
     <div id="mainselection">
 
-      <select ng-model="carbrand" ng-options="brand.title for brand in brands" ng-change="loadModelSelector(carbrand.title); selectedBrand(carbrand.title)">
+      <select ng-model="carbrand" ng-options="brand.title for brand in brands"
+              ng-change="loadModelSelector(carbrand.title); selectedBrand(carbrand.title)">
       </select>
     </div>
 <hr>
 
     <label id="markenlabel">Marke</label>
     <div id="mainselection">
-      <select ng-model="carmodel" ng-options="model.title for model in models" ng-change="selectedModel(carmodel.title)">
+      <select ng-model="carmodel" ng-options="model.title for model in models"
+              ng-change="selectedModel(carmodel.title)">
       </select>
     </div>
 

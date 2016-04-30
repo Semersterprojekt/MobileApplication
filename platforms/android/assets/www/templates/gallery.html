@@ -1,6 +1,10 @@
 <ion-view view-title="Gallery">
 
-  <ion-content ng-init="init()" style="background: #000000;">
+  <ion-content style="background: #000000;">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <div class="row" ng-repeat="image in urllisten" ng-if="$index % 4 === 0">
       <div class="col col-25">
         <img ng-src="http://193.5.58.95/img/test_tmbn/{{urllisten[$index].img_path}}" width="100%"/>

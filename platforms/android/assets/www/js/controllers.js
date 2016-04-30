@@ -26,6 +26,7 @@ app.controller('AccountCtrl', function ($scope) {
   $scope.settings = {
     enableFriends: true
   };
+
 });
 
 
@@ -35,6 +36,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   //Longitude und Latitude Variablen, die immer wieder überschrieben werden.
   var lat;
   var long;
+  var watch;
 
   var carQueryUrl = "http://www.carqueryapi.com/api/0.3/?callback=JSON_CALLBACK&";
   var selectedBrand = "";
@@ -48,35 +50,38 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
   //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
+    //userposition wird immer wieder aufgerufen.
     $scope.pictureUrl = 'http://placehold.it/300x300';
     loadBrandSelector();
   })
 
 
   //userposition wird immer wieder aufgerufen.
-  var watch = $cordovaGeolocation.watchPosition(watchOptions);
+  watch = $cordovaGeolocation.watchPosition(watchOptions);
   watch.then(
     null,
-    function (err) {
+    function(err) {
       // error
     },
-    function (position) {
-      console.log("watchposition : " + position);
+    function(position) {
+      console.log(position.coords.latitude);
       lat = position.coords.latitude;
+      console.log(position.coords.longitude);
       long = position.coords.longitude;
     });
 
-  $scope.selectedBrand = function(brand){
+
+  $scope.selectedBrand = function (brand) {
     console.log("es wurde " + brand);
     selectedBrand = "";
     selectedBrand = brand;
   }
 
 
-  $scope.selectedModel = function(model){
+  $scope.selectedModel = function (model) {
     console.log("es wurde " + model);
     selectedModel = "";
-    selectedModel= model;
+    selectedModel = model;
   }
 
   //diese Funktion startet die Kamera.
@@ -99,7 +104,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     $cordovaCamera.getPicture(options).then(function (imageData) {
 
       $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
-     localStorage.setItem("imgData", imageData);
+      localStorage.setItem("imgData", imageData);
     }, function (err) {
       // error
     });
@@ -134,16 +139,16 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   }
 
   function storemodels(object) {
-     for (var i = 0; i < object.Models.length; i++) {
-      $scope.models.push({title: object.Models[i].model_name, id : object.Models[i].model_make_id});
+    for (var i = 0; i < object.Models.length; i++) {
+      $scope.models.push({title: object.Models[i].model_name, id: object.Models[i].model_make_id});
     }
   }
 
-  $scope.sendPhoto = function(){
+  $scope.sendPhoto = function () {
     sendData();
   }
 
-  function sendData(){
+  function sendData() {
     console.log("sende Foto wurde aufgerufen");
 
     var url = "http://193.5.58.95/api/v1/tests";
@@ -152,16 +157,19 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     var user_id = localStorage.getItem("userid");
     var b64 = localStorage.getItem("imgData");
 
+
+
     var output = {
       base64: b64,
       brand: selectedBrand,
       model: selectedModel,
-      geoX: "47.00",
-      geoY: "9.00",
+      geoX: lat,
+      geoY: long,
       user_id: user_id
     }
 
-    console.log( selectedBrand + " : " + selectedModel + " : " + user_id );
+    console.log(JSON.stringify(output));
+
     var confirmPopup = $ionicPopup.confirm({
       title: 'Nice Picture',
       template: 'Do you want to upload this Picture?'
@@ -170,6 +178,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
     confirmPopup.then(function (res) {
       if (res) {
+
         $http.post(url, output).then(function (response) {
             watch.clearWatch();
           console.log(JSON.stringify(response));
@@ -184,7 +193,6 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   }
 
 
-
 });
 
 app.controller('GpsCtrl', function ($scope) {
@@ -193,43 +201,53 @@ app.controller('GpsCtrl', function ($scope) {
 
 app.controller('GalleryCtrl', function ($scope, $http) {
 
+  $scope.urllisten =  [];
 
-  $scope.init = function () {
-    $scope.bilderDownload();
-  }
 
+//Diese Funktion wird bei jedem aufruf der View aufgeführt.
+  $scope.$on('$ionicView.enter', function () {
+    $scope.user = localStorage.getItem("username");
+    bilderDownload();
+  })
 
   function gibDatenaus(daten) {
+    $scope.urllisten = [];
     var daten = daten;
     //console.log(daten);
-    var urlListen = [];
 
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-        //console.log($scope.urllisten);
+       console.log($scope.urllisten);
       }
     }
   }
 
-  $scope.bilderDownload = function () {
-    getUrl = "http://193.5.58.95/api/v1/tests?token=" + localStorage.getItem("token");
+  function bilderDownload() {
+    console.log("bilderdownload wird ausgeführt");
+   var  getUrl = "http://193.5.58.95/api/v1/tests";
     $scope.urllisten = [];
 
 
     $http.get(getUrl).success(function (data) {
       gibDatenaus(data);
 
-      //   console.log(data.data.img_path);
+      console.log(JSON.stringify(data));
     });
   }
 
-//Diese Funktion wird bei jedem aufruf der View aufgeführt.
-  $scope.$on('$ionicView.enter', function () {
-    $scope.bilderDownload();
-    $scope.user = localStorage.getItem("username");
+  $scope.doRefresh = function() {
+    var getUrl = "http://193.5.58.95/api/v1/tests";
+    $http.get(getUrl)
+      .success(function(newItems) {
+        gibDatenaus(newItems);
+      })
+      .finally(function() {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+  };
 
-  })
 
 });
 
@@ -278,6 +296,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $aut
       $http.get('http://193.5.58.95/api/v1/authenticate/user').success(function (resp) {
         console.log(resp);
         localStorage.setItem("username", resp.user.username);
+        localStorage.setItem("userid", resp.user.id);
         $state.go("tab.gallery");
       }).error(function (err) {
          // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
@@ -336,6 +355,12 @@ app.controller('RegisterCtrl', function ($scope, $http, $state) {
 });
 
 
-app.controller('SettingCtrl', function ($scope) {
-  console.log()
+app.controller('SettingCtrl', function ($scope,$cordovaGeolocation) {
+
+  $scope.test = function (){
+    var watchId = navigator.geolocation.watchPosition(geolocationSuccess,
+      [geolocationError],
+      [geolocationOptions]);
+
+  }
 });
