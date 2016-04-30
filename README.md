@@ -14,7 +14,9 @@ Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu
 
 4. Nun kann mit einem Doubleclick auf die .apk Datei, diese gestartet werden. Ein Installationsassistenen führt sie durch die Installation. 
 
+### iOS
 
+Führ IOS bieten wir keine Unterstützung an. 
 
 
 
