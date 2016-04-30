@@ -30,45 +30,28 @@ app.controller('AccountCtrl', function ($scope) {
 });
 
 
-app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopup, $cordovaGeolocation, $state) {
+app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera,$ionicPopup, $http, $ionicPopup, $cordovaGeolocation, $state) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   //Longitude und Latitude Variablen, die immer wieder überschrieben werden.
   var lat;
   var long;
-  var watch;
+
 
   var carQueryUrl = "http://www.carqueryapi.com/api/0.3/?callback=JSON_CALLBACK&";
   var selectedBrand = "";
   var selectedModel = "";
+  var intervalID ;
+  var checkLocationStatusID;
 
-//optionen für den Location Service.
-  var watchOptions = {
-    timeout: 1000,
-    enableHighAccuracy: false // may cause errors if true
-  };
 
   //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
     //userposition wird immer wieder aufgerufen.
     $scope.pictureUrl = 'http://placehold.it/300x300';
+    intervalID =  setInterval(getCoordiantes, 3000);
     loadBrandSelector();
   })
-
-
-  //userposition wird immer wieder aufgerufen.
-  watch = $cordovaGeolocation.watchPosition(watchOptions);
-  watch.then(
-    null,
-    function(err) {
-      // error
-    },
-    function(position) {
-      console.log(position.coords.latitude);
-      lat = position.coords.latitude;
-      console.log(position.coords.longitude);
-      long = position.coords.longitude;
-    });
 
 
   $scope.selectedBrand = function (brand) {
@@ -87,6 +70,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   //diese Funktion startet die Kamera.
   $scope.takePicture = function () {
 
+
     //Optionen Für die Kamera
     var options = {
       quality: 100,
@@ -94,8 +78,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: false,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 200,
-      targetHeight: 200,
+      targetWidth: 1000,
+      targetHeight: 1000,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false,
       correctOrientation: true
@@ -110,7 +94,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     });
   }
 
-  function loadBrandSelector(){
+  function loadBrandSelector() {
     $scope.brands = [];
     var cmd = "cmd=getMakes";
     $http.jsonp(carQueryUrl + cmd).success(function (resp) {
@@ -122,11 +106,11 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
   function storebrands(object) {
     for (var i = 0; i < object.Makes.length; i++) {
-      $scope.brands.push({title: object.Makes[i].make_display, id : object.Makes[i].make_id});
+      $scope.brands.push({title: object.Makes[i].make_display, id: object.Makes[i].make_id});
     }
   }
 
-  $scope.loadModelSelector = function(make){
+  $scope.loadModelSelector = function (make) {
     console.log("im Loadmodelselector mit der marke " + make);
     $scope.models = [];
     var cmd = "cmd=getModels&make=" + make;
@@ -158,7 +142,6 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     var b64 = localStorage.getItem("imgData");
 
 
-
     var output = {
       base64: b64,
       brand: selectedBrand,
@@ -180,9 +163,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       if (res) {
 
         $http.post(url, output).then(function (response) {
-            watch.clearWatch();
           console.log(JSON.stringify(response));
-          });
+        });
       } else {
         //der user hat das Bild verworfen.
         $scope.pictureUrl = 'http://placehold.it/300x300';
@@ -192,6 +174,80 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     });
   }
 
+  function getCoordiantes() {
+    //optionen für den Location Service.
+    var watchOptions = {
+      timeout: 1000,
+      enableHighAccuracy: false // may cause errors if true
+    };
+
+    $cordovaGeolocation
+      .getCurrentPosition(watchOptions)
+      .then(function (position) {
+        lat  = position.coords.latitude;
+        long = position.coords.longitude;
+      }, function(err) {
+        // error
+      });
+
+
+    //Abgefragt ob die Location Enabled ist. -> sonst erscheint das Popup und intervall wird angehalten.
+    cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+      if(!enabled){
+        clearInterval(intervalID);
+        showPopup();
+        localStorage.setItem("lastRunFalse", true);
+      }else if(enabled && (localStorage.getItem("lastRunFalse") == true)){
+        intervalID = setInterval(getCoordiantes, 3000);
+        localStorage.setItem("lastRunFalse", false);
+      }
+    }, function(error){
+      console.error("The following error occurred: "+error);
+    });
+
+
+    console.log(lat + " : " + long);
+    makeText(lat, long);
+  }
+
+  function showPopup(){
+    //soll ein Popup anzeigen.
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Location Fehler',
+        template: 'Die Positionierung muss eingeschalten werden'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          cordova.plugins.diagnostic.switchToLocationSettings();
+          checkLocationStatusID = setInterval(testFkn, 1000);
+        } else {
+          $state.go("tab.gallery");
+        }
+      });
+  }
+
+  function testFkn(){
+    cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+      if(enabled){
+        
+        clearInterval(checkLocationStatusID);
+        intervalID = setInterval(getCoordiantes, 3000);
+      }
+    }, function(error){
+      console.error("The following error occurred: "+error);
+    });
+  }
+
+
+  function makeText(long, lat){
+      $cordovaToast.showShortTop(long + " : " + lat)
+        .then(function (success) {
+          // success
+        }, function (error) {
+          // error
+        });
+    }
 
 });
 
@@ -201,7 +257,15 @@ app.controller('GpsCtrl', function ($scope) {
 
 app.controller('GalleryCtrl', function ($scope, $http) {
 
-  $scope.urllisten =  [];
+  $scope.urllisten = [];
+
+  cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+    if(!enabled){
+      cordova.plugins.diagnostic.switchToLocationSettings();
+    }
+  }, function(error){
+    console.error("The following error occurred: "+error);
+  });
 
 
 //Diese Funktion wird bei jedem aufruf der View aufgeführt.
@@ -218,14 +282,14 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-       console.log($scope.urllisten);
+        console.log($scope.urllisten);
       }
     }
   }
 
   function bilderDownload() {
     console.log("bilderdownload wird ausgeführt");
-   var  getUrl = "http://193.5.58.95/api/v1/tests";
+    var getUrl = "http://193.5.58.95/api/v1/tests";
     $scope.urllisten = [];
 
 
@@ -236,13 +300,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     });
   }
 
-  $scope.doRefresh = function() {
+  $scope.doRefresh = function () {
     var getUrl = "http://193.5.58.95/api/v1/tests";
     $http.get(getUrl)
-      .success(function(newItems) {
+      .success(function (newItems) {
         gibDatenaus(newItems);
       })
-      .finally(function() {
+      .finally(function () {
         // Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.refreshComplete');
       });
@@ -299,7 +363,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $aut
         localStorage.setItem("userid", resp.user.id);
         $state.go("tab.gallery");
       }).error(function (err) {
-         // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
+          // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
         }
       )
     })
@@ -355,12 +419,40 @@ app.controller('RegisterCtrl', function ($scope, $http, $state) {
 });
 
 
-app.controller('SettingCtrl', function ($scope,$cordovaGeolocation) {
+app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
 
-  $scope.test = function (){
-    var watchId = navigator.geolocation.watchPosition(geolocationSuccess,
-      [geolocationError],
-      [geolocationOptions]);
+  var myVar = setInterval(getLocationUpdate, 1000);
 
+
+  function showLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log("Latitude : " + latitude + " Longitude: " + longitude);
   }
+
+  function errorHandler(err) {
+    if(err.code == 1) {
+      console.log("Error: Access is denied!");
+    }
+
+    else if( err.code == 2) {
+      console.log("Error: Position is unavailable!");
+    }
+  }
+
+  function getLocationUpdate(){
+    console.log("geoLocationUpdate wird aufgerufen");
+    console.log(navigator.geolocation);
+    if(navigator.geolocation){
+      // timeout at 60000 milliseconds (60 seconds)
+      var options = {timeout:2000};
+      geoLoc = navigator.geolocation;
+      watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
+    }
+
+    else{
+      console.log("Sorry, browser does not support geolocation!");
+    }
+  }
+
 });

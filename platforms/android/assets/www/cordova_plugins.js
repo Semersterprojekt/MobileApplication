@@ -105,6 +105,13 @@ module.exports = [
         "clobbers": [
             "window.BackgroundGeolocation"
         ]
+    },
+    {
+        "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+        "id": "cordova.plugins.diagnostic.Diagnostic",
+        "clobbers": [
+            "cordova.plugins.diagnostic"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -120,7 +127,8 @@ module.exports.metadata =
     "cordova-plugin-geolocation": "2.1.0",
     "cordova-plugin-x-toast": "2.5.0",
     "cordova-plugin-dialogs": "1.2.1",
-    "com.transistorsoft.cordova.background-geolocation": "1.5.1"
+    "com.transistorsoft.cordova.background-geolocation": "1.5.1",
+    "cordova.plugins.diagnostic": "2.3.16"
 };
 // BOTTOM OF METADATA
 });
