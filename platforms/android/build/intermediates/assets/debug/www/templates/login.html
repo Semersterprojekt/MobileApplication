@@ -1,0 +1,27 @@
+<ion-view title="Login">
+  <ion-content style="background: #000000;">
+    <section class="login-container">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}">
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input style=" color:#ff4000;" id="username" type="text" value="rijad@gmail.com">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input style=" color: #ff4000;" id="password" type="password" value="12345">
+        </label>
+      </div>
+
+
+      <div class="button-bar col-bottom">
+        <a class="button button-positive" ng-click="logIn()">Log in</a>
+        <a class="button button-balanced" href="#">Registrieren</a>
+
+      </div>
+    </section>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,201 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:1-32:12
+	android:hardwareAccelerated
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:11-45
+	xmlns:android
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:153-211
+	package
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:98-152
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+	android:versionName
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:70-97
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+	android:versionCode
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:2:46-69
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+		INJECTED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml
+supports-screens
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:5-191
+	android:resizeable
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:106-131
+	android:largeScreens
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:49-76
+	android:anyDensity
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:23-48
+	android:normalScreens
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:77-105
+	android:xlargeScreens
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:160-188
+	android:smallScreens
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:3:132-159
+uses-permission#android.permission.INTERNET
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:4:5-67
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:21:5-66
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:4:22-64
+application
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:5:5-21:19
+MERGED from [com.google.android.gms:play-services-location:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.volley:volley:1.0.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/AndroidManifest.xml:9:5-20
+MERGED from [:tslocationmanager:] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/tslocationmanager/AndroidManifest.xml:9:5-12:19
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:22:5-20
+	android:allowBackup
+		ADDED from [:tslocationmanager:] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/tslocationmanager/AndroidManifest.xml:10:9-35
+	android:supportsRtl
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:5:116-142
+	android:label
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:5:83-115
+	android:icon
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:5:53-82
+	android:hardwareAccelerated
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:5:18-52
+activity#com.ionicframework.semesterapplication440437.MainActivity
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:9-11:20
+	android:windowSoftInputMode
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:294-336
+	android:screenOrientation
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:194-230
+	android:label
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:97-134
+	android:configChanges
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:19-96
+	android:theme
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:231-293
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:166-193
+	android:launchMode
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:6:135-165
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:7:13-10:29
+	android:label
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:7:28-65
+action#android.intent.action.MAIN
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:8:17-69
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:8:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:9:17-77
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:9:27-74
+service#com.transistorsoft.locationmanager.BackgroundGeolocationService
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:12:9-99
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:12:18-96
+service#com.transistorsoft.locationmanager.LocationService
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:13:9-86
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:13:18-83
+service#com.transistorsoft.locationmanager.ActivityRecognitionService
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:14:9-97
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:14:18-94
+service#com.transistorsoft.locationmanager.GeofenceService
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:15:9-86
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:15:18-83
+receiver#com.transistorsoft.cordova.bggeo.BootReceiver
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:16:9-20:20
+	android:exported
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:16:42-66
+	android:enabled
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:16:19-41
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:16:67-127
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:17:13-19:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:18:17-79
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:18:25-76
+uses-sdk
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:22:5-74
+MERGED from [com.google.android.gms:play-services-location:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:26:5-42
+MERGED from [com.google.android.gms:play-services-base:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.volley:volley:1.0.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/AndroidManifest.xml:7:5-43
+MERGED from [:tslocationmanager:] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/tslocationmanager/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [android:CordovaLib:unspecified:debug] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/AndroidManifest.xml:25:5-44
+	android:targetSdkVersion
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:22:42-71
+	android:minSdkVersion
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:22:15-41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.2.1] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/AndroidManifest.xml:23:9-75
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:23:5-81
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:23:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:24:5-81
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:24:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:25:5-79
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:25:22-76
+uses-permission#android.permission.GET_TASKS
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:26:5-68
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:26:22-65
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:27:5-79
+MERGED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:20:5-78
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:27:22-76
+uses-permission#android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:28:5-89
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:28:22-86
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:29:5-68
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:29:22-65
+uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:30:5-94
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:30:22-91
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:31:5-81
+	android:name
+		ADDED from /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/AndroidManifest.xml:31:22-78
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:21:9-23:69
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:22:13-58
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/AndroidManifest.xml:23:13-66
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:22:5-24:33
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:24:8-31
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:8.4.0] /home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/AndroidManifest.xml:23:8-40

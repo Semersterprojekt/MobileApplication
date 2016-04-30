@@ -1,0 +1,32 @@
+<ion-view view-title="Gallery">
+
+  <ion-content style="background: #000000;">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="row" ng-repeat="image in urllisten" ng-if="$index % 4 === 0">
+      <div class="col col-25">
+        <img ng-src="http://193.5.58.95/img/test_tmbn/{{urllisten[$index].img_path}}" width="100%"/>
+      </div>
+      <div class="col col-25">
+        <img ng-src="http://193.5.58.95/img/test_tmbn/{{urllisten[$index+1].img_path}}" width="100%"/>
+      </div>
+      <div class="col col-25">
+        <img ng-src="http://193.5.58.95/img/test_tmbn/{{urllisten[$index+2].img_path}}" width="100%"/>
+      </div>
+      <div class="col col-25">
+        <img ng-src="http://193.5.58.95/img/test_tmbn/{{urllisten[$index+3].img_path}}" width="100%"/>
+      </div>
+    </div>
+  </ion-content>
+
+  <div class="bar bar-footer">
+    <div class="list-borderless">
+      <a class="item item-icon-left" href="#/login">
+        <i class="icon ion-person-stalker"></i>
+        angemeldet als {{user}}
+      </a>
+    </div>
+  </div>
+</ion-view>

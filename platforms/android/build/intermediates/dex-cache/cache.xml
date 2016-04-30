@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.1_43a4e178866705e47452c7d2099c0dd978e72db9.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b77d4f8d6325cf7cb8862fcb5d353e9d194d29b5">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-unspecified-debug_bb6efb198f5344fade31d5e41d1febf7ee040942.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.1_488c5917528cbc372ecf13e4ab37e2c79347ab4e.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/.gradle/caches/modules-2/files-2.1/de.greenrobot/eventbus/3.0.0-beta1/d4a559b2dfb3e8a00ed37c440e118584f60db046/eventbus-3.0.0-beta1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d4a559b2dfb3e8a00ed37c440e118584f60db046">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/eventbus-3.0.0-beta1_05bb0ce1cb28294d58d02bf40adb3452b078b6e9.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.4.0_80d67a8371221ec66c38537c026f4305595c315f.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.1_ca91b0231414e56989b42bcc5364952be5dcb995.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_78f31cc676b23055326114bc7a2dd5a9cb657fb2.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_1b189c464db4e746f7f38b5fcb787c05a6451e6c.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/tslocationmanager/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="784d3932a26236adc8cdb46da677310ba2c1038d">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/intermediates-exploded-aar-tslocationmanager_3061b5540a0893b73bfc239cf955c0aabc36e464.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a8412b654dab86d57bf90683367488211c8a81f1">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-location-8.4.0_4705e5e2c53171138caebdb1c7066cb417784eb6.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.4.0_9a7afc8e50ec552b1848c189a38d8d4aa30e388e.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_c384af1e6a13faa533bc231e76ddf78144cba720.jar" />
+    </item>
+    <item
+        jar="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-maps-8.4.0_9b39193266e643e82e11888b36d3f4da9f5a59bb.jar" />
+    </item>
+    <item
+        jar="/opt/android-sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/home/getspeed/Documents/IonicProjekte/FirstApp/Semesterapplication/platforms/android/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_a1951760cb0a8a4f984ad11d925cb985dcd14262.jar" />
+    </item>
+
+</items>

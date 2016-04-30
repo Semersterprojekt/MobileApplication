@@ -1,0 +1,30 @@
+<ion-view view-title="Take a Picture">
+  <ion-content style="background: #555555;">
+    <div class="list card">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}" ng-click="takePicture()">
+      </div>
+    </div>
+
+    <hr>
+    <label id="markenlabel">Marke</label>
+    <div id="mainselection">
+
+      <select ng-model="carbrand" ng-options="brand.title for brand in brands"
+              ng-change="loadModelSelector(carbrand.title); selectedBrand(carbrand.title)">
+      </select>
+    </div>
+<hr>
+
+    <label id="markenlabel">Marke</label>
+    <div id="mainselection">
+      <select ng-model="carmodel" ng-options="model.title for model in models"
+              ng-change="selectedModel(carmodel.title)">
+      </select>
+    </div>
+
+    <div class="padding">
+      <a class="button button-block button-dark" ng-click="sendPhoto()">Bild Senden</a>
+    </div>
+  </ion-content>
+</ion-view>

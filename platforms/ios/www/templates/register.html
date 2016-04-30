@@ -1,0 +1,30 @@
+<ion-view title="Register">
+  <ion-content>
+    <div id="loginbereich">
+      <div class="item item-image">
+        <img src="{{pictureUrl}}">
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input id="username" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input id="mail" type="email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input id="password" type="password">
+        </label>
+
+      </div>
+
+      <div class="button-bar">
+        <a class="button button-positive" href="#/login">Zurück</a>
+        <a class="button button-balanced" ng-click="register()">Registrieren</a>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
