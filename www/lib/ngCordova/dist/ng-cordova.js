@@ -1,6 +1,6 @@
 /*!
  * ngCordova
- * v0.1.23-alpha
+ * v0.1.26-alpha
  * Copyright 2015 Drifty Co. http://drifty.com/
  * See LICENSE in this repository for license information
  */
@@ -240,8 +240,8 @@ angular.module('ngCordova.plugins.appVersion', [])
 
       getPackageName: function () {
         var q = $q.defer();
-        cordova.getAppVersion.getPackageName(function (package) {
-          q.resolve(package);
+        cordova.getAppVersion.getPackageName(function (pack) {
+          q.resolve(pack);
         });
 
         return q.promise;
@@ -1163,7 +1163,7 @@ angular.module('ngCordova.plugins.brightness', [])
 angular.module('ngCordova.plugins.calendar', [])
 
   .factory('$cordovaCalendar', ['$q', '$window', function ($q, $window) {
-    
+
     return {
       createCalendar: function (options) {
         var d = $q.defer(),
@@ -1777,14 +1777,14 @@ angular.module('ngCordova.plugins.contacts', [])
 angular.module('ngCordova.plugins.datePicker', [])
 
   .factory('$cordovaDatePicker', ['$window', '$q', function ($window, $q) {
-    
+
     return {
       show: function (options) {
         var q = $q.defer();
         options = options || {date: new Date(), mode: 'date'};
         $window.datePicker.show(options, function (date) {
           q.resolve(date);
-        }, function(error){
+        }, function (error) {
           q.reject(error);
         });
         return q.promise;
@@ -1886,6 +1886,7 @@ angular.module('ngCordova.plugins.deviceMotion', [])
         if (angular.isUndefined(navigator.accelerometer) ||
         !angular.isFunction(navigator.accelerometer.getCurrentAcceleration)) {
           q.reject('Device do not support watchAcceleration');
+          return q.promise;
         }
 
         navigator.accelerometer.getCurrentAcceleration(function (result) {
@@ -1903,6 +1904,7 @@ angular.module('ngCordova.plugins.deviceMotion', [])
         if (angular.isUndefined(navigator.accelerometer) ||
         !angular.isFunction(navigator.accelerometer.watchAcceleration)) {
           q.reject('Device do not support watchAcceleration');
+          return q.promise;
         }
 
         var watchID = navigator.accelerometer.watchAcceleration(function (result) {
@@ -1940,7 +1942,7 @@ angular.module('ngCordova.plugins.deviceOrientation', [])
     var defaultOptions = {
       frequency: 3000 // every 3s
     };
-    
+
     return {
       getCurrentHeading: function () {
         var q = $q.defer();
@@ -2054,6 +2056,71 @@ angular.module('ngCordova.plugins.dialogs', [])
 
       beep: function (times) {
         return navigator.notification.beep(times);
+      },
+
+      activityStart: function (message, title) {
+        var q = $q.defer();
+
+        if (cordova.platformId === 'android') {
+          navigator.notification.activityStart(title, message);
+          q.resolve();
+        } else {
+          q.reject(message, title);
+        }
+
+        return q.promise;
+      },
+
+      activityStop: function () {
+        var q = $q.defer();
+
+        if (cordova.platformId === 'android') {
+          navigator.notification.activityStop();
+          q.resolve();
+        } else {
+          q.reject();
+        }
+
+        return q.promise;
+      },
+
+      progressStart: function (message, title) {
+        var q = $q.defer();
+
+        if (cordova.platformId === 'android') {
+          navigator.notification.progressStart(title, message);
+          q.resolve();
+        } else {
+          q.reject(message, title);
+        }
+
+        return q.promise;
+      },
+
+      progressStop: function () {
+        var q = $q.defer();
+
+        if (cordova.platformId === 'android') {
+          navigator.notification.progressStop();
+          q.resolve();
+        } else {
+          q.reject();
+        }
+
+        return q.promise;
+      },
+
+      progressValue: function (value) {
+        var q = $q.defer();
+
+        if (cordova.platformId === 'android') {
+          navigator.notification.progressValue(value);
+          q.resolve();
+        } else {
+          q.reject(value);
+        }
+
+        return q.promise;
       }
     };
   }]);
@@ -2937,6 +3004,34 @@ angular.module('ngCordova.plugins.file', [])
             q.reject(e);
           }
           return q.promise;
+        },
+
+        readFileMetadata: function (path, file) {
+          var q = $q.defer();
+
+          if ((/^\//.test(file))) {
+            q.reject('directory cannot start with \/');
+          }
+
+          try {
+            var directory = path + file;
+            $window.resolveLocalFileSystemURL(directory, function (fileEntry) {
+              fileEntry.file(function (result) {
+                q.resolve(result);
+              }, function (error) {
+                error.message = $cordovaFileError[error.code];
+                q.reject(error);
+              });
+            }, function (err) {
+              err.message = $cordovaFileError[err.code];
+              q.reject(err);
+            });
+          } catch (e) {
+            e.message = $cordovaFileError[e.code];
+            q.reject(e);
+          }
+
+          return q.promise;
         }
 
         /*
@@ -2972,9 +3067,6 @@ angular.module('ngCordova.plugins.file', [])
          return q.promise;
          },
 
-         readFileMetadata: function (filePath) {
-         //return getFile(filePath, {create: false});
-         }
          */
       };
 
@@ -4007,7 +4099,7 @@ angular.module('ngCordova.plugins.googlePlus', [])
             q.reject(available);
           }
         });
-        
+
         return q.promise;
       }
     };
@@ -5625,9 +5717,9 @@ angular.module('ngCordova.plugins.nativeAudio', [])
         return q.promise;
       },
 
-      preloadComplex: function (id, assetPath, volume, voices) {
+      preloadComplex: function (id, assetPath, volume, voices, delay) {
         var q = $q.defer();
-        $window.plugins.NativeAudio.preloadComplex(id, assetPath, volume, voices, function (result) {
+        $window.plugins.NativeAudio.preloadComplex(id, assetPath, volume, voices, delay, function (result) {
           q.resolve(result);
         }, function (err) {
           q.reject(err);
@@ -5638,11 +5730,11 @@ angular.module('ngCordova.plugins.nativeAudio', [])
 
       play: function (id, completeCallback) {
         var q = $q.defer();
-        $window.plugins.NativeAudio.play(id, completeCallback, function (err) {
-          q.reject(err);
-        }, function (result) {
+        $window.plugins.NativeAudio.play(id, function (result) {
           q.resolve(result);
-        });
+        }, function (err) {
+          q.reject(err);
+        }, completeCallback);
 
         return q.promise;
       },
@@ -5785,25 +5877,25 @@ angular.module('ngCordova.plugins.preferences', [])
   .factory('$cordovaPreferences', ['$window', '$q', function ($window, $q) {
 
      return {
-         
+
          pluginNotEnabledMessage: 'Plugin not enabled',
-    	
+
     	/**
     	 * Decorate the promise object.
     	 * @param promise The promise object.
     	 */
-    	decoratePromise: function(promise){
-    		promise.success = function(fn) {
+      decoratePromise: function (promise) {
+        promise.success = function (fn) {
 	            promise.then(fn);
 	            return promise;
 	        };
 
-	        promise.error = function(fn) {
+        promise.error = function (fn) {
 	            promise.then(null, fn);
 	            return promise;
 	        };
     	},
-    	
+
     	/**
     	 * Store the value of the given dictionary and key.
     	 * @param key The key of the preference.
@@ -5811,18 +5903,18 @@ angular.module('ngCordova.plugins.preferences', [])
          * @param dict The dictionary. It's optional.
          * @returns Returns a promise.
     	 */
-	    store: function(key, value, dict) {
+      store: function (key, value, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var storeResult;
                 if(arguments.length === 3){
@@ -5830,34 +5922,34 @@ angular.module('ngCordova.plugins.preferences', [])
                 } else {
                     storeResult = $window.plugins.appPreferences.store(key, value);
                 }
-                
+
                 storeResult.then(ok, errorCallback);
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-            
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-	    
+
 	    /**
 	     * Fetch the value by the given dictionary and key.
 	     * @param key The key of the preference to retrieve.
          * @param dict The dictionary. It's optional.
          * @returns Returns a promise.
 	     */
-	    fetch: function(key, dict) {
+      fetch: function (key, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var fetchResult;
                 if(arguments.length === 2){
@@ -5869,29 +5961,29 @@ angular.module('ngCordova.plugins.preferences', [])
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-            
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-        
+
         /**
 	     * Remove the value by the given key.
 	     * @param key The key of the preference to retrieve.
          * @param dict The dictionary. It's optional.
          * @returns Returns a promise.
 	     */
-	    remove: function(key, dict) {
+        remove: function (key, dict) {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 var removeResult;
                 if(arguments.length === 2){
@@ -5903,34 +5995,34 @@ angular.module('ngCordova.plugins.preferences', [])
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-	    	
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    },
-        
+
         /**
 	     * Show the application preferences.
          * @returns Returns a promise.
 	     */
-	    show: function() {
+        show: function () {
 	    	var deferred = $q.defer();
 	    	var promise = deferred.promise;
-            
+
             function ok(value){
                 deferred.resolve(value);
             }
-            
+
             function errorCallback(error){
                 deferred.reject(new Error(error));
             }
-            
+
             if($window.plugins){
                 $window.plugins.appPreferences.show()
                     .then(ok, errorCallback);
             } else {
                 deferred.reject(new Error(this.pluginNotEnabledMessage));
             }
-	    	
+
 	    	this.decoratePromise(promise);
 	    	return promise;
 	    }
@@ -6170,6 +6262,19 @@ angular.module('ngCordova.plugins.push_v5', [])
         }
         return q.promise;
       },
+      getBadgeNumber: function () {
+        var q = $q.defer();
+        if (push === undefined) {
+          q.reject(new Error('init must be called before any other operation'));
+        } else {
+          push.getApplicationIconBadgeNumber(function (success) {
+            q.resolve(success);
+          }, function (error) {
+            q.reject(error);
+          });
+        }
+        return q.promise;
+      },
       setBadgeNumber : function (number) {
         var q = $q.defer();
         if (push === undefined) {
@@ -6180,6 +6285,19 @@ angular.module('ngCordova.plugins.push_v5', [])
           }, function (error) {
             q.reject(error);
           }, number);
+        }
+        return q.promise;
+      },
+      finish: function () {
+        var q = $q.defer();
+        if (push === undefined) {
+          q.reject(new Error('init must be called before any other operation'));
+        } else {
+          push.finish(function (success) {
+            q.resolve(success);
+          }, function (error) {
+            q.reject(error);
+          });
         }
         return q.promise;
       }
@@ -6405,7 +6523,7 @@ angular.module('ngCordova.plugins.socialSharing', [])
             q.reject();
           }
         });
-        
+
         return q.promise;
       }
     };

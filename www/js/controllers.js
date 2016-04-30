@@ -37,6 +37,8 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   var long;
 
   var carQueryUrl = "http://www.carqueryapi.com/api/0.3/?callback=JSON_CALLBACK&";
+  var selectedBrand = "";
+  var selectedModel = "";
 
 //optionen für den Location Service.
   var watchOptions = {
@@ -64,6 +66,18 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
       long = position.coords.longitude;
     });
 
+  $scope.selectedBrand = function (brand) {
+    console.log("es wurde " + brand);
+    selectedBrand = "";
+    selectedBrand = brand;
+  }
+
+
+  $scope.selectedModel = function (model) {
+    console.log("es wurde " + model);
+    selectedModel = "";
+    selectedModel = model;
+  }
 
   //diese Funktion startet die Kamera.
   $scope.takePicture = function () {
@@ -85,7 +99,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
     $cordovaCamera.getPicture(options).then(function (imageData) {
 
       $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
-      sendPhoto(imageData);
+      localStorage.setItem("imgData", imageData);
     }, function (err) {
       // error
     });
@@ -108,38 +122,46 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
   }
 
   $scope.loadModelSelector = function(make){
-    console.log("wa geh" + make);
+    console.log("im Loadmodelselector mit der marke " + make);
+    $scope.models = [];
+    var cmd = "cmd=getModels&make=" + make;
+    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
+      storemodels(resp);
+    }).error(function (err) {
+      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+    })
 
   }
 
   function storemodels(object) {
-
-    JSON.stringify(object);
-    /* for (var i = 0; i < object.Makes.length; i++) {
-      $scope.brands.push({title: object.Makes[i].make_display, id : object.Makes[i].make_id});
-    }*/
+    for (var i = 0; i < object.Models.length; i++) {
+      $scope.models.push({title: object.Models[i].model_name, id: object.Models[i].model_make_id});
+    }
   }
 
+  $scope.sendPhoto = function () {
+    sendData();
+  }
 
-  function sendPhoto(image) {
+  function sendData() {
+    console.log("sende Foto wurde aufgerufen");
 
-    var url = "http://193.5.58.95/api/v1/tests?token=" + localStorage.getItem("token");
+    var url = "http://193.5.58.95/api/v1/tests";
 
-    var geoX;
-    var geoY;
-    var comment = "Hier steht der Kommentar drin";
+
     var user_id = localStorage.getItem("userid");
-    var b64 = image;
+    var b64 = localStorage.getItem("imgData");
 
     var output = {
-      data: "text hier sollte daten sein",
-      comment: comment,
       base64: b64,
-      geoX: lat,
-      geoY: long,
+      brand: selectedBrand,
+      model: selectedModel,
+      geoX: "47.00",
+      geoY: "9.00",
       user_id: user_id
     }
 
+    console.log(selectedBrand + " : " + selectedModel + " : " + user_id);
     var confirmPopup = $ionicPopup.confirm({
       title: 'Nice Picture',
       template: 'Do you want to upload this Picture?'
@@ -148,9 +170,9 @@ app.controller('CameraCtrl', function ($scope, $cordovaCamera, $http, $ionicPopu
 
     confirmPopup.then(function (res) {
       if (res) {
-        $http.post(url, output, {headers: {'Content-Type': 'application/json'}})
-          .then(function (response) {
+        $http.post(url, output).then(function (response) {
             watch.clearWatch();
+          console.log(JSON.stringify(response));
           });
       } else {
         //der user hat das Bild verworfen.

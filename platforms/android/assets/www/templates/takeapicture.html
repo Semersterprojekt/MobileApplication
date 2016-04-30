@@ -10,23 +10,19 @@
     <label id="markenlabel">Marke</label>
     <div id="mainselection">
 
-      <select>
-        <option ng-repeat="brand in brands" ng-click="loadModelSelector()">
-          {{brand.title}}
-        </option>
+      <select ng-model="carbrand" ng-options="brand.title for brand in brands" ng-change="loadModelSelector(carbrand.title); selectedBrand(carbrand.title)">
       </select>
     </div>
 <hr>
 
-    <label id="modellabel">Modell</label>
+    <label id="markenlabel">Marke</label>
     <div id="mainselection">
-      <select>
-        <option ng-repeat="model in models"> {{model.title}}</option>
+      <select ng-model="carmodel" ng-options="model.title for model in models" ng-change="selectedModel(carmodel.title)">
       </select>
     </div>
 
     <div class="padding">
-      <button class="button button-block button-dark" ng-click="takePicture()">Bild Senden</button>
+      <a class="button button-block button-dark" ng-click="sendPhoto()">Bild Senden</a>
     </div>
   </ion-content>
 </ion-view>
