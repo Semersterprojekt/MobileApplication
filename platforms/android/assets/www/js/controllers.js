@@ -30,41 +30,85 @@ app.controller('AccountCtrl', function ($scope) {
 });
 
 
-app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera,$ionicPopup, $http, $ionicPopup, $cordovaGeolocation, $state) {
+app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $ionicPopup, $http, $ionicPopup, $cordovaGeolocation, $state) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   //Longitude und Latitude Variablen, die immer wieder überschrieben werden.
   var lat;
   var long;
 
-
+//weitere Lokalen Variablen (können nur innerhalb des Ctrl verwendet werden.
   var carQueryUrl = "http://www.carqueryapi.com/api/0.3/?callback=JSON_CALLBACK&";
   var selectedBrand = "";
   var selectedModel = "";
-  var intervalID ;
+  var intervalID;
   var checkLocationStatusID;
 
 
   //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
-    //userposition wird immer wieder aufgerufen.
+    //Beim Starten der View, wird immer derselbe Placeholder als img gesetzt.
     $scope.pictureUrl = 'http://placehold.it/300x300';
-    intervalID =  setInterval(getCoordiantes, 3000);
+    //es wird ein Interval gestartet, der periodisch die Koordinaten abholt.
+    intervalID = setInterval(getCoordiantes, 3000);
+    //Das erste Dropdownmenu (Marken) wird mit Daten befüllt.
     loadBrandSelector();
   })
 
-
+  //Diese Methode dient dazu, die gewünschte Position, aus dem Select, zu speichern
   $scope.selectedBrand = function (brand) {
-    console.log("es wurde " + brand);
     selectedBrand = "";
     selectedBrand = brand;
   }
 
-
+//Diese Methode dient dazu, die gewünschte Position, aus dem Select, zu speichern
   $scope.selectedModel = function (model) {
     console.log("es wurde " + model);
     selectedModel = "";
     selectedModel = model;
+  }
+
+  //Funktion holt über die API von carqueryapi.com alle verfügbaren Marken und speichert sie in einem Array.
+  function loadBrandSelector() {
+    //array, das vom HTML File gelesen werden kann.
+    $scope.brands = [];
+    //Befehl für die API abfrage
+    var cmd = "cmd=getMakes";
+    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
+      //Im Json "resp" verstecken sich die Marken.
+      //die Methode storebrands() speichert die Marken in scope.arrays welche vom HTML gelesen werden können.
+      storebrands(resp);
+    }).error(function (err) {
+      //fehlerbehandlung wenn http.jsonp() nicht ausgeführt werden kann.
+      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+    })
+  }
+
+  //speichert die Marken vom json in ein scope.array
+  function storebrands(object) {
+    for (var i = 0; i < object.Makes.length; i++) {
+      $scope.brands.push({title: object.Makes[i].make_display, id: object.Makes[i].make_id});
+    }
+  }
+
+  //in abhängigkeit der vorgewählten Marke, werden die entsprechenden Modelle geladen.
+  $scope.loadModelSelector = function (make) {
+    //console.log("im Loadmodelselector mit der marke " + make);
+    $scope.models = [];
+    var cmd = "cmd=getModels&make=" + make;
+    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
+      storemodels(resp);
+    }).error(function (err) {
+      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+    })
+
+  }
+
+  //speichert die Modelle vom json in ein scope.array
+  function storemodels(object) {
+    for (var i = 0; i < object.Models.length; i++) {
+      $scope.models.push({title: object.Models[i].model_name, id: object.Models[i].model_make_id});
+    }
   }
 
   //diese Funktion startet die Kamera.
@@ -86,62 +130,37 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera,$io
     };
 
     $cordovaCamera.getPicture(options).then(function (imageData) {
-
+      //speichert Bilddaten in eine scope.variable, damit sie in der View angezeigt werden kann.
       $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
+      //gleichzeitig werden die Bilddaten auch im lokalen Speicher abgelegt.
       localStorage.setItem("imgData", imageData);
     }, function (err) {
       // error
     });
   }
 
-  function loadBrandSelector() {
-    $scope.brands = [];
-    var cmd = "cmd=getMakes";
-    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
-      storebrands(resp);
-    }).error(function (err) {
-      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
-    })
-  }
-
-  function storebrands(object) {
-    for (var i = 0; i < object.Makes.length; i++) {
-      $scope.brands.push({title: object.Makes[i].make_display, id: object.Makes[i].make_id});
-    }
-  }
-
-  $scope.loadModelSelector = function (make) {
-    console.log("im Loadmodelselector mit der marke " + make);
-    $scope.models = [];
-    var cmd = "cmd=getModels&make=" + make;
-    $http.jsonp(carQueryUrl + cmd).success(function (resp) {
-      storemodels(resp);
-    }).error(function (err) {
-      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
-    })
-
-  }
-
-  function storemodels(object) {
-    for (var i = 0; i < object.Models.length; i++) {
-      $scope.models.push({title: object.Models[i].model_name, id: object.Models[i].model_make_id});
-    }
-  }
-
+  //Buttons und ähnliche HTML elemente können nur scope Funktionen aufrufen. -> Diese möchte das Foto speichern
   $scope.sendPhoto = function () {
     sendData();
   }
 
+  //Darin werden alle Variablen zu einem JSON zusammengefasst und abgeschickt.
   function sendData() {
-    console.log("sende Foto wurde aufgerufen");
-
+    //An diese URL werden die Daten geschickt. ACHTUNG durch den Einsatz von Satellizer ist eine Tokenübergabe überflüssig. Dies geschieht im Hintergrund
     var url = "http://193.5.58.95/api/v1/tests";
-
-
+    //Speicherung der Userid in eine lokale Variable
     var user_id = localStorage.getItem("userid");
+    //Speicherung der img Daten in einer lokalen Variable
     var b64 = localStorage.getItem("imgData");
 
+    console.log(lat);
+    console.log(long);
+    if((lat || long) == null){
+      makeTextString("Geolocation ist noch nicht bereit. Haben Sie einen Moment Geduld");
+      $state.go("tap.gallery");
+    }
 
+    //JSON wird mit allen nötigen Variablen aufgebaut.
     var output = {
       base64: b64,
       brand: selectedBrand,
@@ -151,29 +170,29 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera,$io
       user_id: user_id
     }
 
-    console.log(JSON.stringify(output));
-
+    //Bevor Daten abgeschickt werden, muss der User aktiv bestätigen dass er das will.
     var confirmPopup = $ionicPopup.confirm({
       title: 'Nice Picture',
       template: 'Do you want to upload this Picture?'
     });
 
-
+    //Auswertung der Popup Entscheidung.
     confirmPopup.then(function (res) {
       if (res) {
-
+        //Dies geschieht wenn der User zustimmt.
         $http.post(url, output).then(function (response) {
-          console.log(JSON.stringify(response));
         });
       } else {
-        //der user hat das Bild verworfen.
+        //Dies geschieht wenn der User ablehnt.
         $scope.pictureUrl = 'http://placehold.it/300x300';
       }
+      //Unabhängig der Entscheidung wird man zur Gallery weitergeleitet.
       $state.go("tab.gallery");
 
     });
   }
 
+  //Dies Funktion aktualisiert die Location Daten.
   function getCoordiantes() {
     //optionen für den Location Service.
     var watchOptions = {
@@ -184,70 +203,80 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera,$io
     $cordovaGeolocation
       .getCurrentPosition(watchOptions)
       .then(function (position) {
-        lat  = position.coords.latitude;
+        lat = position.coords.latitude;
         long = position.coords.longitude;
-      }, function(err) {
+      }, function (err) {
         // error
       });
 
-
+    console.log(lat + " : " + long);
     //Abgefragt ob die Location Enabled ist. -> sonst erscheint das Popup und intervall wird angehalten.
-    cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-      if(!enabled){
+    cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+      if (!enabled) {
+        //interval wird abgebrochen
         clearInterval(intervalID);
+        //Popup, dass nur mit eingeschaltenem Locationservice weitergearbeitet werden kann.
         showPopup();
         localStorage.setItem("lastRunFalse", true);
-      }else if(enabled && (localStorage.getItem("lastRunFalse") == true)){
-        intervalID = setInterval(getCoordiantes, 3000);
-        localStorage.setItem("lastRunFalse", false);
       }
-    }, function(error){
-      console.error("The following error occurred: "+error);
+    }, function (error) {
+      console.error("The following error occurred: " + error);
+    });
+  }
+
+  function showPopup() {
+    //soll ein Popup anzeigen.
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Location Fehler',
+      template: 'Die Positionierung muss eingeschalten werden'
     });
 
-
-    console.log(lat + " : " + long);
-    makeText(lat, long);
+    confirmPopup.then(function (res) {
+      if (res) {
+        //der User möchte gerne den Locationservice einschalten. Der Default-OS Dialog erscheint.
+        cordova.plugins.diagnostic.switchToLocationSettings();
+        //nebensächlicher Interval startet. Dieser überprüft, ob der user die Location schon eingeschaltet hat.
+        checkLocationStatusID = setInterval(nebenIntervall, 1000);
+      } else {
+        //Falls der User nicht die Location einschalten will, wird er zur Gallery weitergeleitet.
+        $state.go("tab.gallery");
+      }
+    });
   }
 
-  function showPopup(){
-    //soll ein Popup anzeigen.
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'Location Fehler',
-        template: 'Die Positionierung muss eingeschalten werden'
-      });
-
-      confirmPopup.then(function(res) {
-        if(res) {
-          cordova.plugins.diagnostic.switchToLocationSettings();
-          checkLocationStatusID = setInterval(testFkn, 1000);
-        } else {
-          $state.go("tab.gallery");
-        }
-      });
-  }
-
-  function testFkn(){
-    cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-      if(enabled){
-        
+  //Diese Funktion wird im nebensächlichen Interval aufgerufen.
+  function nebenIntervall() {
+    //Ist Location schon eingeschaltet?
+    cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+      if (enabled) {
+        //Falls dies stimmt, wird der nebensächliche Interval gestoppt und der Hautpsächliche nimmt seine arbeit wieder auf.
         clearInterval(checkLocationStatusID);
         intervalID = setInterval(getCoordiantes, 3000);
       }
-    }, function(error){
-      console.error("The following error occurred: "+error);
+    }, function (error) {
+      console.error("The following error occurred: " + error);
     });
   }
 
+//Diese Funktion erstellt schnell und unkompliziert die Toasts (Kleine infoboxes die kurz erscheinen und wieder verschwinden. )
+  function makeText(long, lat) {
+    $cordovaToast.showShortTop(long + " : " + lat)
+      .then(function (success) {
+        // success
+      }, function (error) {
+        // error
+      });
+  }
 
-  function makeText(long, lat){
-      $cordovaToast.showShortTop(long + " : " + lat)
-        .then(function (success) {
-          // success
-        }, function (error) {
-          // error
-        });
-    }
+  //Diese Funktion erstellt schnell und unkompliziert die Toasts (Kleine infoboxes die kurz erscheinen und wieder verschwinden. )
+  function makeTextString(msg) {
+    $cordovaToast.showShortTop(msg)
+      .then(function (success) {
+        // success
+      }, function (error) {
+        // error
+      });
+  }
 
 });
 
@@ -259,12 +288,12 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
   $scope.urllisten = [];
 
-  cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-    if(!enabled){
+  cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+    if (!enabled) {
       cordova.plugins.diagnostic.switchToLocationSettings();
     }
-  }, function(error){
-    console.error("The following error occurred: "+error);
+  }, function (error) {
+    console.error("The following error occurred: " + error);
   });
 
 
@@ -282,13 +311,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-        console.log($scope.urllisten);
+       // console.log($scope.urllisten);
       }
     }
   }
 
   function bilderDownload() {
-    console.log("bilderdownload wird ausgeführt");
+   // console.log("bilderdownload wird ausgeführt");
     var getUrl = "http://193.5.58.95/api/v1/tests";
     $scope.urllisten = [];
 
@@ -317,8 +346,6 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $auth) {
   var token;
-  var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
-  var getUserInfoUrl = 'http://193.5.58.95/api/v1/authenticate/user?token=';
   //proenginelogo
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   var username;
@@ -335,27 +362,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $aut
       email: username,
       password: password
     }
-    /*
-     $http.post(loginUrl, data, headers).then(function (resp) {
-     console.log(resp);
 
-     if (resp.status == 200) {
-     //speicherung des Tokens in einer Session
-     $scope.token = resp.data.token;
-     localStorage.setItem("token", $scope.token);
-     $http.get(getUserInfoUrl + localStorage.getItem("token"), headers).then(function (resp) {
-     localStorage.setItem("userid", resp.data.user.id);
-     localStorage.setItem("user", resp.data.user.username);
-     })
-     $state.go("tab.upload");
-     }
-
-
-     }, function (fail) {
-     console.log(fail);
-     //showMessage("Login hat nicht funktioniert");
-     });
-     */
     $auth.login(data).then(function () {
       $http.get('http://193.5.58.95/api/v1/authenticate/user').success(function (resp) {
         console.log(resp);
@@ -363,7 +370,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $aut
         localStorage.setItem("userid", resp.user.id);
         $state.go("tab.gallery");
       }).error(function (err) {
-          // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
+        // showMessage("Login Fehler. Überprüfen sie die Anmeldedaten!");
         }
       )
     })
@@ -420,6 +427,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $state) {
 
 
 app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
+/*
 
   var myVar = setInterval(getLocationUpdate, 1000);
 
@@ -431,28 +439,29 @@ app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
   }
 
   function errorHandler(err) {
-    if(err.code == 1) {
+    if (err.code == 1) {
       console.log("Error: Access is denied!");
     }
 
-    else if( err.code == 2) {
+    else if (err.code == 2) {
       console.log("Error: Position is unavailable!");
     }
   }
 
-  function getLocationUpdate(){
+  function getLocationUpdate() {
     console.log("geoLocationUpdate wird aufgerufen");
     console.log(navigator.geolocation);
-    if(navigator.geolocation){
+    if (navigator.geolocation) {
       // timeout at 60000 milliseconds (60 seconds)
-      var options = {timeout:2000};
+      var options = {timeout: 2000};
       geoLoc = navigator.geolocation;
       watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
     }
 
-    else{
+    else {
       console.log("Sorry, browser does not support geolocation!");
     }
   }
+*/
 
 });

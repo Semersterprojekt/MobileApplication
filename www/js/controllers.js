@@ -93,7 +93,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
 
   //in abhängigkeit der vorgewählten Marke, werden die entsprechenden Modelle geladen.
   $scope.loadModelSelector = function (make) {
-    console.log("im Loadmodelselector mit der marke " + make);
+    //console.log("im Loadmodelselector mit der marke " + make);
     $scope.models = [];
     var cmd = "cmd=getModels&make=" + make;
     $http.jsonp(carQueryUrl + cmd).success(function (resp) {
@@ -153,6 +153,13 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
     //Speicherung der img Daten in einer lokalen Variable
     var b64 = localStorage.getItem("imgData");
 
+    console.log(lat);
+    console.log(long);
+    if ((lat || long) == null) {
+      makeTextString("Geolocation ist noch nicht bereit. Haben Sie einen Moment Geduld");
+      $state.go("tap.gallery");
+    }
+
     //JSON wird mit allen nötigen Variablen aufgebaut.
     var output = {
       base64: b64,
@@ -202,7 +209,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
         // error
       });
 
-
+    console.log(lat + " : " + long);
     //Abgefragt ob die Location Enabled ist. -> sonst erscheint das Popup und intervall wird angehalten.
     cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
       if (!enabled) {
@@ -261,6 +268,16 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
       });
   }
 
+  //Diese Funktion erstellt schnell und unkompliziert die Toasts (Kleine infoboxes die kurz erscheinen und wieder verschwinden. )
+  function makeTextString(msg) {
+    $cordovaToast.showShortTop(msg)
+      .then(function (success) {
+        // success
+      }, function (error) {
+        // error
+      });
+  }
+
 });
 
 app.controller('GpsCtrl', function ($scope) {
@@ -294,13 +311,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-        console.log($scope.urllisten);
+        // console.log($scope.urllisten);
       }
     }
   }
 
   function bilderDownload() {
-    console.log("bilderdownload wird ausgeführt");
+    // console.log("bilderdownload wird ausgeführt");
     var getUrl = "http://193.5.58.95/api/v1/tests";
     $scope.urllisten = [];
 
@@ -329,8 +346,6 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
 app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $auth) {
   var token;
-  var loginUrl = 'http://193.5.58.95/api/v1/authenticate';
-  var getUserInfoUrl = 'http://193.5.58.95/api/v1/authenticate/user?token=';
   //proenginelogo
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   var username;
@@ -347,27 +362,7 @@ app.controller('LoginCtrl', function ($scope, $http, $state, $cordovaToast, $aut
       email: username,
       password: password
     }
-    /*
-     $http.post(loginUrl, data, headers).then(function (resp) {
-     console.log(resp);
 
-     if (resp.status == 200) {
-     //speicherung des Tokens in einer Session
-     $scope.token = resp.data.token;
-     localStorage.setItem("token", $scope.token);
-     $http.get(getUserInfoUrl + localStorage.getItem("token"), headers).then(function (resp) {
-     localStorage.setItem("userid", resp.data.user.id);
-     localStorage.setItem("user", resp.data.user.username);
-     })
-     $state.go("tab.upload");
-     }
-
-
-     }, function (fail) {
-     console.log(fail);
-     //showMessage("Login hat nicht funktioniert");
-     });
-     */
     $auth.login(data).then(function () {
       $http.get('http://193.5.58.95/api/v1/authenticate/user').success(function (resp) {
         console.log(resp);
@@ -432,6 +427,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $state) {
 
 
 app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
+  /*
 
   var myVar = setInterval(getLocationUpdate, 1000);
 
@@ -466,5 +462,6 @@ app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
       console.log("Sorry, browser does not support geolocation!");
     }
   }
+   */
 
 });
