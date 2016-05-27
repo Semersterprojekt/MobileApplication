@@ -155,7 +155,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
 
     console.log(lat);
     console.log(long);
-    if((lat || long) == null){
+    if ((lat || long) == null) {
       makeTextString("Geolocation ist noch nicht bereit. Haben Sie einen Moment Geduld");
       $state.go("tap.gallery");
     }
@@ -296,12 +296,26 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     console.error("The following error occurred: " + error);
   });
 
+  setInterval(function(){
+    var getUrl = "http://193.5.58.95/api/v1/tests";
+    $http.get(getUrl)
+      .success(function (newItems) {
+        gibDatenaus(newItems);
+      })
+      .finally(function () {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+  }, 5000)
 
 //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
-    $scope.user = localStorage.getItem("username");
+    $scope.username = localStorage.getItem("username");
+    console.log($scope.username);
     bilderDownload();
   })
+
+
 
   function gibDatenaus(daten) {
     $scope.urllisten = [];
@@ -311,13 +325,13 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     for (item in daten) {
       for (subItem in daten[item]) {
         $scope.urllisten.push(daten[item][subItem]);
-       // console.log($scope.urllisten);
+        // console.log($scope.urllisten);
       }
     }
   }
 
   function bilderDownload() {
-   // console.log("bilderdownload wird ausgeführt");
+    // console.log("bilderdownload wird ausgeführt");
     var getUrl = "http://193.5.58.95/api/v1/tests";
     $scope.urllisten = [];
 
@@ -328,18 +342,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
       console.log(JSON.stringify(data));
     });
   }
-
-  $scope.doRefresh = function () {
-    var getUrl = "http://193.5.58.95/api/v1/tests";
-    $http.get(getUrl)
-      .success(function (newItems) {
-        gibDatenaus(newItems);
-      })
-      .finally(function () {
-        // Stop the ion-refresher from spinning
-        $scope.$broadcast('scroll.refreshComplete');
-      });
-  };
+  
 
 
 });
@@ -427,7 +430,7 @@ app.controller('RegisterCtrl', function ($scope, $http, $state) {
 
 
 app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
-/*
+  /*
 
   var myVar = setInterval(getLocationUpdate, 1000);
 
@@ -462,6 +465,6 @@ app.controller('SettingCtrl', function ($scope, $cordovaGeolocation) {
       console.log("Sorry, browser does not support geolocation!");
     }
   }
-*/
+   */
 
 });

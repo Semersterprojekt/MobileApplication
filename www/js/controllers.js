@@ -296,12 +296,26 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     console.error("The following error occurred: " + error);
   });
 
+  setInterval(function(){
+    var getUrl = "http://193.5.58.95/api/v1/tests";
+    $http.get(getUrl)
+      .success(function (newItems) {
+        gibDatenaus(newItems);
+      })
+      .finally(function () {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+  }, 5000)
 
 //Diese Funktion wird bei jedem aufruf der View aufgeführt.
   $scope.$on('$ionicView.enter', function () {
-    $scope.user = localStorage.getItem("username");
+    $scope.username = localStorage.getItem("username");
+    console.log($scope.username);
     bilderDownload();
   })
+
+
 
   function gibDatenaus(daten) {
     $scope.urllisten = [];
@@ -328,18 +342,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
       console.log(JSON.stringify(data));
     });
   }
-
-  $scope.doRefresh = function () {
-    var getUrl = "http://193.5.58.95/api/v1/tests";
-    $http.get(getUrl)
-      .success(function (newItems) {
-        gibDatenaus(newItems);
-      })
-      .finally(function () {
-        // Stop the ion-refresher from spinning
-        $scope.$broadcast('scroll.refreshComplete');
-      });
-  };
+  
 
 
 });
