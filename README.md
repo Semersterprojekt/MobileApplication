@@ -16,7 +16,7 @@ Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu
 
 ### iOS
 
-Führ IOS bieten wir keine Unterstützung an. 
+Für IOS bieten wir keine Unterstützung an. 
 
 
 
