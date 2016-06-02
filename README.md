@@ -6,7 +6,7 @@ Frontend System des Semesterprojekts, im Modul Webapplikation
 
 Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu speichern.
 
-1. Suche in der Strucktur nach platform/android/build/outputs/apk/android-debug.apk
+1. Suche in der Strucktur nach platforms/android/build/outputs/apk/android-debug.apk
 
 2. Die Datei auf den Speicher, des Android-Gerät laden. 
 
@@ -16,7 +16,7 @@ Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu
 
 ### iOS
 
-Führ IOS bieten wir keine Unterstützung an. 
+Für IOS bieten wir keine Unterstützung an. 
 
 
 
