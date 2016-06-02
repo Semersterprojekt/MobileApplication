@@ -5,9 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngCordova', 'ui.router', 'satellizer'])
 
-.run(function($ionicPlatform) {
+var app = angular.module('starter.controllers', ['ionic', 'ui.router']);
+
+
+app = angular.module('starter', ['ionic', 'starter.controllers',  'ngMaterial', 'ngCordova', 'ui.router', 'satellizer']);
+
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,9 +26,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
 
   });
-})
+});
 
-.config(function($stateProvider, $urlRouterProvider,$authProvider) {
+app.config(function($stateProvider, $urlRouterProvider,$authProvider) {
 
   $authProvider.loginUrl = 'http://193.5.58.95/api/v1/authenticate';
 
