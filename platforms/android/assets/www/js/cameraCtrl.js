@@ -119,7 +119,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
   //Darin werden alle Variablen zu einem JSON zusammengefasst und abgeschickt.
   function sendData() {
     //An diese URL werden die Daten geschickt. ACHTUNG durch den Einsatz von Satellizer ist eine Tokenübergabe überflüssig. Dies geschieht im Hintergrund
-    var url = "http://193.5.58.95/api/v1/tests";
+    var url = "http://193.5.58.95/api/v1/cars";
     //Speicherung der Userid in eine lokale Variable
     var user_id = localStorage.getItem("userid");
     //Speicherung der img Daten in einer lokalen Variable

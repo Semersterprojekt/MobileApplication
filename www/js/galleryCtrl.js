@@ -15,7 +15,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
   });
 
   setInterval(function () {
-    var getUrl = "http://193.5.58.95/api/v1/tests";
+    var getUrl = "http://193.5.58.95/api/v1/cars";
     $http.get(getUrl)
       .success(function (newItems) {
         gibDatenaus(newItems);
@@ -46,7 +46,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
 
   function bilderDownload() {
     // console.log("bilderdownload wird ausgeführt");
-    var getUrl = "http://193.5.58.95/api/v1/tests";
+    var getUrl = "http://193.5.58.95/api/v1/cars";
     $scope.urllisten = [];
 
 

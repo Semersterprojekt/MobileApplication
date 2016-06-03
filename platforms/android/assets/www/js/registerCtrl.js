@@ -7,8 +7,6 @@ app.controller('RegisterCtrl', function ($scope, $http, $state, $cordovaToast,$i
 
   $scope.pictureUrl = "img/icon_without_radius.jpg";
   var registerUrl = 'http://193.5.58.95/api/v1/authenticate/register'
-  console.log("bin im register Controller");
-
 
   $scope.register = function () {
     var username = document.getElementById("reg_username").value;
