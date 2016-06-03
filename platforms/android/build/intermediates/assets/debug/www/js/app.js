@@ -84,7 +84,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
       views: {
         'tab-settings': {
           templateUrl: 'templates/setting.html',
-          controller: 'SettingCtrl'
+
         }
       }
     });
