@@ -6,7 +6,7 @@ Frontend System des Semesterprojekts, im Modul Webapplikation
 
 Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu speichern.
 
-1. Navigiere nach **Release** und lade die **android-debug.apk** Datei herunter.
+1. Navigiere nach **Release** und lade die **android-debug.apk** Datei herunter, der neusten Version.
 
 2. Die Datei auf den Speicher, des Android-Gerät laden. 
 
