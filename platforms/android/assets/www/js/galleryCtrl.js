@@ -42,6 +42,8 @@ app.controller('GalleryCtrl', function ($scope, $http) {
         $scope.urllisten.push(daten[item][subItem]);
       }
     }
+
+    console.log($scope.urllisten);
   }
 
   function bilderDownload() {
