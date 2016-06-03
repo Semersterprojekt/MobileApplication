@@ -14,7 +14,7 @@ Unter Android ist es erforderlich die Installationsdatei auf dem Mobiledevice zu
 
 4. Nun kann mit einem Doubleclick auf die .apk Datei, diese gestartet werden. Ein Installationsassistenen führt sie durch die Installation. 
 
-5. Jeder kann sich selber anmelden mit  'vornamen@gmail.com' ex: danilo@gmail.com -- alle haben das Password 12345.
+5. Jeder kann sich selber anmelden mit  'vornamen@gmail.com' Bsp: 'danilo@gmail.com' -- alle haben das Password 12345.
 
 ### iOS
 
