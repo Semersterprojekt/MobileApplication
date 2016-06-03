@@ -9,9 +9,9 @@
 var app = angular.module('starter.controllers', ['ionic', 'ui.router']);
 
 
-app = angular.module('starter', ['ionic', 'starter.controllers',  'ngMaterial', 'ngCordova', 'ui.router', 'satellizer']);
+app = angular.module('starter', ['ionic', 'starter.controllers', 'ngMaterial', 'ngCordova', 'ui.router', 'satellizer']);
 
-app.run(function($ionicPlatform) {
+app.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -28,7 +28,7 @@ app.run(function($ionicPlatform) {
   });
 });
 
-app.config(function($stateProvider, $urlRouterProvider,$authProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 
   $authProvider.loginUrl = 'http://193.5.58.95/api/v1/authenticate';
 

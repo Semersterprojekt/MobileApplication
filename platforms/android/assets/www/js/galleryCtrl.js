@@ -14,7 +14,7 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     console.error("The following error occurred: " + error);
   });
 
-  setInterval(function(){
+  setInterval(function () {
     var getUrl = "http://193.5.58.95/api/v1/tests";
     $http.get(getUrl)
       .success(function (newItems) {
@@ -31,7 +31,6 @@ app.controller('GalleryCtrl', function ($scope, $http) {
     $scope.username = localStorage.getItem("username");
     bilderDownload();
   })
-
 
 
   function gibDatenaus(daten) {
@@ -55,7 +54,6 @@ app.controller('GalleryCtrl', function ($scope, $http) {
       gibDatenaus(data);
     });
   }
-
 
 
 });
