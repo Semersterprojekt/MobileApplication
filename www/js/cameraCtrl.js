@@ -35,7 +35,6 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
 
 //Diese Methode dient dazu, die gewünschte Position, aus dem Select, zu speichern
   $scope.selectedModel = function (model) {
-    console.log("es wurde " + model);
     selectedModel = "";
     selectedModel = model;
   }
@@ -52,7 +51,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
       storebrands(resp);
     }).error(function (err) {
       //fehlerbehandlung wenn http.jsonp() nicht ausgeführt werden kann.
-      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+      makeTextString("Beim laden der Auto's ist etwas schiefgegangen.");
     })
   }
 
@@ -71,7 +70,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
     $http.jsonp(carQueryUrl + cmd).success(function (resp) {
       storemodels(resp);
     }).error(function (err) {
-      makeToast("Beim laden der Auto's ist etwas schiefgegangen.");
+      makeTextString("Beim laden der Auto's ist etwas schiefgegangen.");
     })
 
   }
@@ -85,8 +84,6 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
 
   //diese Funktion startet die Kamera.
   $scope.takePicture = function () {
-
-
     //Optionen Für die Kamera
     var options = {
       quality: 100,
@@ -216,7 +213,7 @@ app.controller('CameraCtrl', function ($scope, $cordovaToast, $cordovaCamera, $i
     });
   }
 
-  //Diese Funktion wird im nebensächlici hen Interval aufgerufen.
+  //Diese Funktion wird im nebensächlichen Interval aufgerufen.
   function nebenIntervall() {
     //Ist Location schon eingeschaltet?
     cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
